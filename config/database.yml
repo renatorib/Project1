@@ -1,0 +1,15 @@
+development: &default  
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  database: freight-TMS_development
+  username: postgres
+  password: postgres
+
+test:
+  <<: *default
+  database: freight-TMS_test
+
+production:
+  <<: *default
+  database: freight-TMS
