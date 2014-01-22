@@ -6,7 +6,9 @@ class FreightsController < ApplicationController
 
 
 	def new
-		@freight = Freight.new
+		@freight = Freight.new(shipper: Shipper.first)
+		@origins = City.all
+		@destinations = City.all
 	end
 
 end

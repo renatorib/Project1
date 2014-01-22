@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116073146) do
+ActiveRecord::Schema.define(version: 20140122100154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,12 @@ ActiveRecord::Schema.define(version: 20140116073146) do
     t.boolean  "insured"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "situation"
+    t.float    "width"
+    t.float    "length"
+    t.float    "weigth"
+    t.float    "amount"
+    t.float    "heigth"
   end
 
   add_index "freights", ["destination_id"], name: "index_freights_on_destination_id", using: :btree
