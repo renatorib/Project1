@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Freight</th>
+    <th>Price</th>
+    <th>Urgency</th>    
+    <th>Expiration</th>
+    <th>Situation</th>    
+    <th></th>
+    <th></th>
+  </tr>
+ 
+ <% @freights.each do |freight| %>
+  <tr>
+    <td><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></td>
+    <td><%= freight.price %></td>
+    <td><%= freight.urgency %></td>    
+    <td><%= freight.expiration %></td>        
+    <td><%= freight.situation %></td>            
+    <td><%= link_to "Edit", edit_freight_path(freight) %></td>
+    <td><%= link_to "Cancel", freight, method: :delete, data: { confirm: "Are you sure?" } %></td>
+  </tr>
+<% end %>
+</table>
+<br />

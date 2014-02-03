@@ -7,7 +7,7 @@ describe Freight do
 	it { should belong_to(:destination).class_name('City') }
 
 	it { should ensure_inclusion_of(:urgency).in_array(%w(high normal)) }
-	it { should ensure_inclusion_of(:situation).in_array(%w(waiting bid transport delivered finalized)) }
+	it { should ensure_inclusion_of(:situation).in_array(%w(waiting bid transport delivered finalized cancelled)) }
 	it { should validate_presence_of(:expiration)}	
 
   it { should allow_value(Date.today).for(:expiration) }

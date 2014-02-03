@@ -1,40 +1,54 @@
 class FreightsController < ApplicationController
+ 	respond_to :html, :xml 
 
 	def index
-
+		@freights = Freight.all
+		respond_with(@freights)
 	end
 
 	def new
-		@freight = Freight.new(shipper: Shipper.first)
-		@origins = City.all
-		@destinations = City.all
+		@freight = Freight.new(shipper: Shipper.first, situation: Freight::WAITING)
+	  respond_with(@freight)
 	end
 
-	def create
-		binding.pry
-		@freight = Freight.new(urgency: params[:urgency], price: params[:price], description: params[:description])
-		@freight.origin = City.find(params[:origin])
-		@freight.destination = City.find(params[:destination])
-		@freight.tracked = params[:tracked]
-		@freight.insured = params[:insured]
-		@freight.price = params[:heigth]
-		@freight.heigth = params[:heigth]
-		@freight.width = params[:width]
-		@freight.weigth = params[:weigth]
-		@freight.length = params[:length]
-		@freight.amount = params[:amount]
-		
-		if @freight.save
-			redirect_to(action: "index")
-		else
-			render :nothing
-		end 
+	def create		
+		@freight = Freight.new(freight_params)
+		@freight.situation = Freight::WAITING
+	  flash[:notice] = "Successfully created product." if @freight.save
+		respond_with(@freight)	  
 	end
+
+	def edit
+		@freight = Freight.find(params[:id])
+	  respond_with(@freight)		
+	end
+
+	def update
+		@freight = Freight.find(params[:id])		  
+	  flash[:notice] = "Successfully updated product." if @freight.save
+	  respond_with(@freight)
+	end
+
+	def show
+		redirect_to freights_path		
+	end
+
+  def destroy  
+    freight = Freight.find(params[:id])  
+    freight.situation = Freight::CANCELLED
+    flash[:notice] = "Successfully cancelled product." if freight.save
+    redirect_to freights_path
+  end
 
   private
 
-  def freight_params
-    params.require(:freight)
+  def freight_params    
+		params.require(:freight).permit("expiration(3i)", "expiration(2i)", "expiration(1i)", 
+																		:origin_id			, :destination_id	, :weigth					, 
+																		:urgency				, :price					, :description		, 
+																		:tracked				, :insured				, :heigth					, 
+																		:width					, :length					, :amount					, 
+																		:situation			, origin: [:id, :name], destination: [:id, :name])
   end
 
 end
