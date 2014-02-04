@@ -14,8 +14,8 @@ class Freight < ActiveRecord::Base
   DELIVERED = "delivered"
   FINALIZED = "finalized"
   CANCELLED = "cancelled"
-  SITUATIONS = [Freight::BID, 
-                Freight::WAITING, 
+  SITUATIONS = [Freight::WAITING, 
+                Freight::BID, 
                 Freight::TRANSPORT, 
                 Freight::DELIVERED, 
                 Freight::FINALIZED, 
@@ -31,6 +31,16 @@ class Freight < ActiveRecord::Base
   validates_numericality_of :width, greater_than_or_equal_to: 0   
   validates_numericality_of :amount, greater_than_or_equal_to: 0
 
+  def is_finished?
+    [Freight::DELIVERED, Freight::FINALIZED, Freight::CANCELLED].include?(self.situation)
+  end
 
+  def is_waiting?
+    self.situation == Freight::WAITING
+  end
 
+  scope :from_shipper, lambda { |shipper|
+    where("shipper_id = ?", shipper.id)
+  }
+  
 end

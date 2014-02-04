@@ -1,13 +1,14 @@
 class FreightsController < ApplicationController
  	respond_to :html, :xml 
+ 	before_filter :authenticate_user!
 
 	def index
-		@freights = Freight.all
+		@freights = Freight.from_shipper(Shipper.first)
 		respond_with(@freights)
 	end
 
 	def new
-		@freight = Freight.new(shipper: Shipper.first, situation: Freight::WAITING)
+		@freight = Freight.new(shipper: Shipper.first, situation: Freight::WAITING, urgency: Freight::NORMAL)
 	  respond_with(@freight)
 	end
 

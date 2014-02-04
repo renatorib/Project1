@@ -1,30 +1,53 @@
 <%= form_for(freight, as: :freight) do |f| %>
-
-	<%= render "layouts/error_messages", :target => @freight %>
 	<br>
+	<%= render "layouts/error_messages", :target => @freight %>	<br>
 	<%= f.label(:situation, 'Situation') %> <%= f.text_field(:situation, disabled: true) %> <br>
-	<%= f.label(:origin_id, 'Origin city') %> <%= f.collection_select(:origin_id, City.all, :id, :name) %> 
-	<br>	
-	<%= f.label(:destination_id, 'Destination city') %> <%= f.collection_select(:destination_id, City.all, :id, :name) %>
+	
+	<%= f.label(:origin_id, 'Origin city') %> 
+	<%= f.collection_select(:origin_id, 
+													City.all, 
+													:id, 
+													:name, 
+													{}, 
+													{disabled: !@freight.new_record?}) %>	<br>	
+
+	<%= f.label(:destination_id, 'Destination city') %> 
+	<%= f.collection_select(:destination_id, 
+													City.all, 
+													:id, 
+													:name,
+													{},
+													{disabled: !@freight.new_record?}) %>	<br>
+
+	<%= f.label(:expiration, 'Expires in') %>	
+	<%= date_select(:freight, 
+									:expiration, 
+									{default: Date.today, 
+									 start_year: Date.today.year, 
+									 order: [:day, :month, :year], 
+									 disabled: !@freight.new_record?}) %> <br>
+
+	<%= f.label(:price, 'Price') %>	<%= f.number_field(:price, disabled: !@freight.new_record?) %> <br> 
+	<br>
+	<%= f.label(:urgency, 'Urgency') %>
+	<%= f.radio_button(:urgency, Freight::HIGH, disabled: !@freight.is_waiting?) %> <%= f.label(:urgency, 'High') %>
+	<%= f.radio_button(:urgency, Freight::NORMAL, disabled: !@freight.is_waiting?) %> <%= f.label(:urgency, 'Normal') %>
 	<br>
 
-	<%= f.label(:urgency, 'Urgency') %>
-	<%= f.radio_button(:urgency, Freight::HIGH) %> <%= f.label(:urgency, 'High') %>
-	<%= f.radio_button(:urgency, Freight::NORMAL) %> <%= f.label(:urgency, 'Normal') %><br>
+	<%= f.label(:tracked, 'Tracked') %> <%= f.check_box(:tracked, disabled: !@freight.is_waiting?) %> 
+	<%= f.label(:insured, 'Insured') %> <%= f.check_box(:insured, disabled: !@freight.is_waiting?) %> <br>
+	<%= f.label(:description, 'Optional description') %> <br> 
+	<%= f.text_area(:description, size: "60x12", disabled: !@freight.is_waiting?) %> <br> 
 
-	<%= f.label(:tracked, 'Tracked') %> <%= f.check_box(:tracked) %> <br>
-	<%= f.label(:insured, 'Insured') %> <%= f.check_box(:insured) %> <br>
-	<%= f.label(:expiration, 'Expires in') %>	<%= date_select(:freight, :expiration, {default: Date.today, start_year: Date.today.year, order: [:day, :month, :year]}) %> <br>
-
-	<%= f.label(:price, 'Price') %>	<%= f.number_field(:price) %> <br> 
-	<%= f.label(:description, 'Optional description') %> <%= f.text_area(:description, size: "60x12") %> <br> 
+	<br>
+	<br>
 
 	<%= f.label(:specifications, 'Specifications load') %> <br>
-	<%= f.label('height', 'Heigth') %> <%= f.number_field(:heigth) %> <br>
-	<%= f.label('width' , 'Width' ) %> <%= f.number_field(:width ) %> <br>
-	<%= f.label('weigth', 'Weigth') %> <%= f.number_field(:weigth) %> <br>
-	<%= f.label('length', 'Length') %> <%= f.number_field(:length) %> <br>
-	<%= f.label('amount', 'Amount') %> <%= f.number_field(:amount) %> <br>
+	<%= f.label('height', 'Heigth') %> <%= f.number_field(:heigth, disabled: !@freight.is_waiting?) %> <br>
+	<%= f.label('width' , 'Width' ) %> <%= f.number_field(:width , disabled: !@freight.is_waiting?) %> <br>
+	<%= f.label('weigth', 'Weigth') %> <%= f.number_field(:weigth, disabled: !@freight.is_waiting?) %> <br>
+	<%= f.label('length', 'Length') %> <%= f.number_field(:length, disabled: !@freight.is_waiting?) %> <br>
+	<%= f.label('amount', 'Amount') %> <%= f.number_field(:amount, disabled: !@freight.is_waiting?) %> <br>
 
 	<%= f.submit %>
 <% end %>

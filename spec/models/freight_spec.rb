@@ -20,4 +20,34 @@ describe Freight do
 	it { should validate_numericality_of(:width).is_greater_than_or_equal_to(0) }    	
 	it { should validate_numericality_of(:length).is_greater_than_or_equal_to(0) } 
 	it { should validate_numericality_of(:amount).is_greater_than_or_equal_to(0) } 	
+
+	it "should know if freight is finished" do
+		freight = Freight.new(situation: Freight::CANCELLED)
+		expect(freight.is_finished?).to eql(true)
+
+		freight = Freight.new(situation: Freight::FINALIZED)
+		expect(freight.is_finished?).to eql(true)
+
+		freight = Freight.new(situation: Freight::DELIVERED)
+		expect(freight.is_finished?).to eql(true)
+
+		freight = Freight.new(situation: Freight::WAITING)
+		expect(freight.is_finished?).to eql(false)
+
+		freight = Freight.new(situation: Freight::BID)
+		expect(freight.is_finished?).to eql(false)
+
+		freight = Freight.new(situation: Freight::TRANSPORT)
+		expect(freight.is_finished?).to eql(false)
+	end
+
+	it "should know if freight is waiting for bids" do
+		freight = Freight.new(situation: Freight::WAITING)
+		expect(freight.is_waiting?).to eql(true)
+
+		freight = Freight.new(situation: Freight::BID)
+		expect(freight.is_waiting?).to eql(false)
+	end
+
+
 end
