@@ -3,7 +3,7 @@ class FreightsController < ApplicationController
  	before_filter :authenticate_user!
 
 	def index
-		@freights = Freight.from_shipper(Shipper.first)
+		@freights = Freight.from_shipper(current_user.shipper)
 		respond_with(@freights)
 	end
 

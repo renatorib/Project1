@@ -2,7 +2,6 @@ class Freight < ActiveRecord::Base
   belongs_to :shipper
   belongs_to :origin, class_name: 'City'
   belongs_to :destination, class_name: 'City'
-  has_many :contacts, through: :shipper  
 
   HIGH = "high"
   NORMAL = "normal"

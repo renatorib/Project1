@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :driver
-  belongs_to :shipper_contacts
+  belongs_to :contact
+  delegate :shipper, to: :contact
 end
