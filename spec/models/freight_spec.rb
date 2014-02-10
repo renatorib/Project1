@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe Freight do
 	it { should belong_to(:shipper) }
-	it { should have_many(:contacts).through(:shipper) }	
 	it { should belong_to(:origin).class_name('City') }
 	it { should belong_to(:destination).class_name('City') }
 

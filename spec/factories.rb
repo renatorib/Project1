@@ -15,4 +15,11 @@ FactoryGirl.define do
     name "Francisco Beltrão"
     association :state    
   end
+
+  factory :user do
+    email "test@test.com"    
+    password "12345678"
+    password_confirmation "12345678"
+    association :contact    
+  end
 end
