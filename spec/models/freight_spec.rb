@@ -48,5 +48,24 @@ describe Freight do
 		expect(freight.is_waiting?).to eql(false)
 	end
 
+	describe "on return freights" do
 
+		before :each do
+			@shipper = FactoryGirl.create(:shipper)
+			@shipper2 = FactoryGirl.create(:shi80eper, name: "Shipper 2", cnpj: "38518221000129")
+
+			@freight1 = FactoryGirl.create(:freight, shipper: @shipper, situation: "bid")
+			@freight2 = FactoryGirl.create(:freight, shipper: @shipper, situation: "waiting")
+			@freight3 = FactoryGirl.create(:freight, shipper: @shipper2, situation: "finalized")
+		end
+
+		it "should return freights by shipper" do
+			expect(Freight.from_shipper(@shipper).count).to eql(2)
+			expect(Freight.from_shipper(@shipper2).count).to eql(1)			
+		end
+
+		it "should return freights that are on offer" do
+			expect(Freight.on_offer.count).to eql(2)
+		end
+	end
 end

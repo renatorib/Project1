@@ -4,5 +4,5 @@ class State < ActiveRecord::Base
 
   validates_uniqueness_of :name, :acronym
   validates_presence_of :name, :acronym
-  validates_length_of :acronym, is: 2
+  # validates_length_of :acronym, is: 2
 end

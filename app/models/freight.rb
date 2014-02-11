@@ -41,5 +41,7 @@ class Freight < ActiveRecord::Base
   scope :from_shipper, lambda { |shipper|
     where("shipper_id = ?", shipper.id)
   }
+
+  scope :on_offer, -> { where("situation = 'bid' or situation = 'waiting'") }
   
 end

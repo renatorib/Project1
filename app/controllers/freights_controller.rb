@@ -15,7 +15,7 @@ class FreightsController < ApplicationController
 	def create		
 		@freight = Freight.new(freight_params)
 		@freight.situation = Freight::WAITING
-	  flash[:notice] = "Successfully created product." if @freight.save
+	  flash[:notice] = "Successfully created freight." if @freight.save
 		respond_with(@freight)	  
 	end
 
@@ -26,7 +26,7 @@ class FreightsController < ApplicationController
 
 	def update
 		@freight = Freight.find(params[:id])		  
-	  flash[:notice] = "Successfully updated product." if @freight.save
+	  flash[:notice] = "Successfully updated freight." if @freight.save
 	  respond_with(@freight)
 	end
 
@@ -37,7 +37,7 @@ class FreightsController < ApplicationController
   def destroy  
     freight = Freight.find(params[:id])  
     freight.situation = Freight::CANCELLED
-    flash[:notice] = "Successfully cancelled product." if freight.save
+    flash[:notice] = "Successfully cancelled freight." if freight.save
     redirect_to freights_path
   end
 
