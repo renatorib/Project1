@@ -20,39 +20,53 @@ describe Freight do
 	it { should validate_numericality_of(:length).is_greater_than_or_equal_to(0) } 
 	it { should validate_numericality_of(:amount).is_greater_than_or_equal_to(0) } 	
 
-	it "should know if freight is finished" do
-		freight = Freight.new(situation: Freight::CANCELLED)
-		expect(freight.is_finished?).to eql(true)
+	describe "on look the freight" do
 
-		freight = Freight.new(situation: Freight::FINALIZED)
-		expect(freight.is_finished?).to eql(true)
+		it "should know if freight is finished" do
+			freight = Freight.new(situation: Freight::CANCELLED)
+			expect(freight.is_finished?).to eql(true)
 
-		freight = Freight.new(situation: Freight::DELIVERED)
-		expect(freight.is_finished?).to eql(true)
+			freight = Freight.new(situation: Freight::FINALIZED)
+			expect(freight.is_finished?).to eql(true)
 
-		freight = Freight.new(situation: Freight::WAITING)
-		expect(freight.is_finished?).to eql(false)
+			freight = Freight.new(situation: Freight::DELIVERED)
+			expect(freight.is_finished?).to eql(true)
 
-		freight = Freight.new(situation: Freight::BID)
-		expect(freight.is_finished?).to eql(false)
+			freight = Freight.new(situation: Freight::WAITING)
+			expect(freight.is_finished?).to eql(false)
 
-		freight = Freight.new(situation: Freight::TRANSPORT)
-		expect(freight.is_finished?).to eql(false)
-	end
+			freight = Freight.new(situation: Freight::BID)
+			expect(freight.is_finished?).to eql(false)
 
-	it "should know if freight is waiting for bids" do
-		freight = Freight.new(situation: Freight::WAITING)
-		expect(freight.is_waiting?).to eql(true)
+			freight = Freight.new(situation: Freight::TRANSPORT)
+			expect(freight.is_finished?).to eql(false)
+		end
 
-		freight = Freight.new(situation: Freight::BID)
-		expect(freight.is_waiting?).to eql(false)
+		it "should know if freight is waiting for bids" do
+			freight = Freight.new(situation: Freight::WAITING)
+			expect(freight.is_waiting?).to eql(true)
+
+			freight = Freight.new(situation: Freight::BID)
+			expect(freight.is_waiting?).to eql(false)
+		end
+
+		it "should know how left days until expiration" do
+			freight = Freight.new(expiration: Date.today + 3.days)
+			expect(freight.days_left).to eql(3)
+
+			freight = Freight.new(expiration: Date.today)
+			expect(freight.days_left).to eql(0)			
+
+			freight = Freight.new(expiration: Date.today - 15.years)
+			expect(freight.days_left).to eql(0)
+		end
 	end
 
 	describe "on return freights" do
 
 		before :each do
 			@shipper = FactoryGirl.create(:shipper)
-			@shipper2 = FactoryGirl.create(:shi80eper, name: "Shipper 2", cnpj: "38518221000129")
+			@shipper2 = FactoryGirl.create(:shipper, name: "Shipper 2", cnpj: "38518221000129")
 
 			@freight1 = FactoryGirl.create(:freight, shipper: @shipper, situation: "bid")
 			@freight2 = FactoryGirl.create(:freight, shipper: @shipper, situation: "waiting")
@@ -68,4 +82,6 @@ describe Freight do
 			expect(Freight.on_offer.count).to eql(2)
 		end
 	end
+
+
 end

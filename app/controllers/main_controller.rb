@@ -3,7 +3,7 @@ class MainController < ApplicationController
 	respond_to :html, :xml
 	 	
 	def index
-		@freights = Freight.on_offer
+		@freights = Freight.on_offer.order(:urgency)
 		respond_with(@freights)		
 	end
 

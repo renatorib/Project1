@@ -1,9 +1,14 @@
+<br>
+<label> Onde você está? </label> 
+<br>
+<br>
 <table>
   <tr>
     <th>Freight</th>
     <th>Price</th>
     <th>Urgency</th>    
     <th>Expiration</th>
+    <th>Days left</th>    
     <th>Situation</th>    
     <th></th>
     <th></th>
@@ -11,13 +16,16 @@
  
  <% @freights.each do |freight| %>
   <tr>
-    <td><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></td>
-    <td><%= freight.price %></td>
-    <td><%= freight.urgency %></td>    
-    <td><%= freight.expiration %></td>        
-    <td><%= freight.situation %></td>            
-    <!-- <td><%= link_to "Edit", edit_freight_path(freight) %></td> -->
-  </tr>
+    <div>
+      <td class="cities"><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></td>
+      <td class="price"><%= freight.price %></td>
+      <td class="urgency"><%= freight.urgency %></td>    
+      <td class="expiration"><%= freight.expiration %></td>
+      <td class="days left"><%= freight.days_left %></td>      
+      <td class="situation"><%= freight.situation %></td>
+      <!-- <td><%= link_to "Edit", edit_freight_path(freight) %></td> -->
+    </div>
+  </tr>  
 <% end %>
 </table>
 <br />

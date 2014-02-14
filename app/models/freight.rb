@@ -38,6 +38,12 @@ class Freight < ActiveRecord::Base
     self.situation == Freight::WAITING
   end
 
+  def days_left
+    result = (self.expiration - Date.today).to_i rescue nil
+    result = 0 if result < 0
+    result    
+  end
+
   scope :from_shipper, lambda { |shipper|
     where("shipper_id = ?", shipper.id)
   }

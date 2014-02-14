@@ -2,9 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.1'
 gem 'pg'
-gem 'sass-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'awesome_nested_set'
 # gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -16,8 +14,25 @@ gem 'guard-rspec'
 gem 'shoulda-matchers'
 gem 'factory_girl_rails'
 gem 'brazilian-rails'
-
 gem 'jazz_hands'
+# gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                          # :github => 'anjlab/bootstrap-rails',
+                          # :branch => '3.0.0'
+# gem 'sass-rails', '~> 4.0.0'
+# gem 'bootstrap-sass'
+
+# group :assets do
+	gem 'sass-rails', '~> 4.0.0'
+	gem 'coffee-rails', '~> 4.0.0'
+
+#   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+#   # gem 'therubyracer'
+
+	gem 'uglifier', '>= 1.3.0'
+#   gem 'twitter-bootstrap-rails'
+# end
+
+gem 'simplecov', :require => false, :group => :test
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

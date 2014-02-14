@@ -14,6 +14,7 @@ class FreightsController < ApplicationController
 
 	def create		
 		@freight = Freight.new(freight_params)
+		@freight.shipper = current_user.shipper
 		@freight.situation = Freight::WAITING
 	  flash[:notice] = "Successfully created freight." if @freight.save
 		respond_with(@freight)	  

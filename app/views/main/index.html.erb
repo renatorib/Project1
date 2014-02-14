@@ -1,16 +1,15 @@
 <header id="site-header">
   <div class="row">
     <div class="main-header">
-      <%= link_to("Administre os seus fretes", rails_admin_path, :class => "button-login") %>
-      <h1>O seu frete está aqui!</h1>
+      <%= link_to("Administre os seus fretes", rails_admin_path, :class => "button-login") %>      
     </div>
   </div>
 </header>
 
-<main role="main" id="main-content" class="group">
-  <%= render partial: "freights" %> 
-  <div class="row">
-  </div>
-	
-  <!-- <form name="form_seguradora" id="form_seguradora" method="post" action="" target="_blank"></form> -->
+<main>
+  <h1>O seu frete está aqui!</h1>
 </main>
+
+<body-bg>
+  <%= render partial: "freights" %>   
+</body> 
