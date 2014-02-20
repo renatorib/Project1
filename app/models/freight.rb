@@ -3,6 +3,8 @@ class Freight < ActiveRecord::Base
   belongs_to :origin, class_name: 'City'
   belongs_to :destination, class_name: 'City'
 
+  attr_accessor :days_left
+
   HIGH = "high"
   NORMAL = "normal"
   URGENCIES = [Freight::HIGH, Freight::NORMAL]

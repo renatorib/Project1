@@ -1,15 +1,24 @@
-<header id="site-header">
-  <div class="row">
-    <div class="main-header">
-      <%= link_to("Administre os seus fretes", rails_admin_path, :class => "button-login") %>      
-    </div>
-  </div>
-</header>
-
-<main>
-  <h1>O seu frete está aqui!</h1>
-</main>
+<%= nav_bar :static => :top, :brand => "Your freight is right here!", :responsive => true do %>
+	<%= menu_group do %>
+		<%= menu_item "Home", root_path %>
+		<%= menu_divider %>
+		<%= menu_item "You are a Shipper? Manage your freights!", freights_path %>
+		<%= menu_item "You are a Hauler? See your bids!", freights_path %>		
+	<% end %>
+<% end %>
+<br>
 
 <body-bg>
   <%= render partial: "freights" %>   
 </body> 
+
+
+<%= nav_bar :fixed => :bottom do %>
+    <% menu_group :pull => :left do %>
+        <%= menu_item "Home", root_path %>
+        <%= menu_text "We make shiny things" %>
+    <% end %>
+    <% menu_group :pull => :right do %>
+    	
+    <% end %>
+<% end %>
