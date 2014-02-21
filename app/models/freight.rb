@@ -40,6 +40,10 @@ class Freight < ActiveRecord::Base
     self.situation == Freight::WAITING
   end
 
+  def is_high?
+    self.urgency == Freight::HIGH
+  end
+
   def days_left
     result = (self.expiration - Date.today).to_i rescue nil
     result = 0 if result < 0

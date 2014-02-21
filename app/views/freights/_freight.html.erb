@@ -10,7 +10,7 @@
   </tr>
 
  <% @freights.each do |freight| %>
-  <tr>
+  <tr >
     <td><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></td>
     <td><%= freight.price %></td>
     <td><%= freight.urgency.camelize %></td>    

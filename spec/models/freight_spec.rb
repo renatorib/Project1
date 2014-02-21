@@ -60,6 +60,14 @@ describe Freight do
 			freight = Freight.new(expiration: Date.today - 15.years)
 			expect(freight.days_left).to eql(0)
 		end
+
+		it "should know if is high priority" do
+			freight = Freight.new(urgency: Freight::HIGH)			
+			expect(freight).to be_is_high
+
+			freight = Freight.new(urgency: Freight::NORMAL)
+			expect(freight).to_not be_is_high
+		end
 	end
 
 	describe "on return freights" do

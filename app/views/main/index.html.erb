@@ -1,17 +1,47 @@
-<%= nav_bar :static => :top, :brand => "Your freight is right here!", :responsive => true do %>
+<%= nav_bar :static => :top, :brand => "Freight - TMS", :responsive => true do %>
 	<%= menu_group do %>
 		<%= menu_item "Home", root_path %>
 		<%= menu_divider %>
 		<%= menu_item "You are a Shipper? Manage your freights!", freights_path %>
-		<%= menu_item "You are a Hauler? See your bids!", freights_path %>		
+		<%= menu_item "You are a Carrier? See your bids!", freights_path %>		
 	<% end %>
 <% end %>
 <br>
 
+
+<!-- http://www.onextrapixel.com/2012/11/12/how-to-use-twitter-bootstrap-to-create-a-responsive-website-design/ -->
+<div class="container">        
+  <div class="hero-unit">
+    <h1>Freight - TMS</h1>
+    <p>Freight - TMS is your best source for freight</p>
+    <!-- <p><a class="btn btn-primary btn-large">You are a Shipper? Start now! &raquo;</a></p> -->
+    <!-- <p><a class="btn btn-primary btn-large">You are a Carrier? See the bids! &raquo;</a></p>   -->
+  </div>
+       
+  <div class="row">
+    <div class="span4">
+      <h2>For Shipper</h2>
+      <p>With Freight - TMS can provide your shipper freight for the entire national market and get the cheapest deals for top carriers. </p>
+      <p><a class="btn" href="#">Start now! &raquo;</a></p>
+    </div>
+  
+    <div class="span4">
+      <h2>For Carrier</h2>
+      <p>Here at Freight - TMS carrier you will find the best freight, for the best prices cargo exactly where you are, without loss of time and money. </p>
+      <p><a class="btn" href="#">See the best deals on the market! &raquo;</a></p>
+    </div>
+  
+    <div class="span4">
+      <h2>For You</h2>
+      <p>Freight - TMS approaching those in need who carries freight, creating a vast network of shippers and carriers, allowing reduction of waiting time and cost! </p>
+      <!-- <p><a class="btn" href="#">Click meeee &raquo;</a></p> -->
+    </div><!-- .span4 -->  
+  </div><!-- .row -->
+</div><!-- .container -->
+
 <body-bg>
   <%= render partial: "freights" %>   
 </body> 
-
 
 <%= nav_bar :fixed => :bottom do %>
     <% menu_group :pull => :left do %>
