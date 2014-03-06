@@ -44,6 +44,14 @@ class Freight < ActiveRecord::Base
     self.urgency == Freight::HIGH
   end
 
+  def is_tracked?
+    "is#{self.tracked ? "" : "n't"} tracked"
+  end
+
+  def is_insured?
+    "is#{self.insured ? "" : "n't"} insured"
+  end
+
   def days_left
     result = (self.expiration - Date.today).to_i rescue nil
     result = 0 if result < 0

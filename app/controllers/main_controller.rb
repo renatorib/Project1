@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-	before_filter :authenticate_user!, :only => [:login]
+	before_filter :authenticate_user!, :only => [:login, :accept_freight]
 	respond_to :html, :xml
 
 	def index
@@ -9,5 +9,16 @@ class MainController < ApplicationController
 
 	def login
 	end
-	
+
+	def bid
+		@freight = Freight.find(params[:freight]) 
+		respond_with(@freight)
+	end
+
+	def accept
+		@freight = Freight.find(params[:freight])
+		# @freigth.situation = Freight::BID
+		# @freight.save
+		respond_with(@freight)
+	end
 end

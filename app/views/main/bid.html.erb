@@ -1,0 +1,76 @@
+<div id="description" class="container">
+        
+  <div class="row">
+    <div class="span4">
+    </div>
+  
+    <div class="span8">
+      <div>
+        <h2><%= @freight.origin.name_with_state %> to <%= @freight.destination.name_with_state %></h2>
+        <legend></legend>
+      </div>
+
+      <div class="row">
+        <div class="span4">
+          <p>The priority of this freight is <i class= <%= @freight.is_high? ? "icon-fire" : ""%> ></i> <strong> <%= @freight.urgency.camelize %></strong></p>
+        </div>
+        <div class="span4 text-right">
+          <small>This freight expires in <%= @freight.expiration %> <strong>(<%= @freight.days_left %> days left)</strong></small>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <div class="row">
+          <div class="span2 text-right">      
+            <p>Advertiser:</p>
+            <p>Freight value:</p>
+          </div>
+          <div class="span3">
+            <p><%= @freight.shipper.name %></p>
+            <p> <strong>US$ <%= @freight.price.reais %></strong></p>
+          </div>
+          <div class="span2">      
+            <p><%= link_to "Accept this freigth!", accept_path(@freight), class: 'btn btn-primary' %></p>
+          </div>
+        </div>
+      </div>
+
+      <small>This offer has received 3 bids.</small><br>
+      <small>This freight <%= @freight.is_tracked? %> and <%= @freight.is_insured? %>.</small><br>
+	    <legend></legend>
+      <div class="row">
+        <div class="span2">
+          <small>Heigth: <%= @freight.heigth %></small>
+        </div>
+        <div class="span2">          
+          <small>Width: <%= @freight.width %></small>
+        </div>
+        <div class="span2">          
+          <small>Length: <%= @freight.length %></small>
+        </div>
+        <div class="span2">
+          <small>Weigth: <%= @freight.weigth %></small>
+        </div>
+        <div class="span2">        
+          <small>Amount: <%= @freight.amount %></small>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<div id="shipper_contacts" class="container">
+	<legend>Shipper contacts</legend>
+	<p>Contacts unavailable</p>
+</div>
+<div id="detailed_description" class="container">
+	<legend>Load description</legend>
+  <p><%= @freight.description %></p>
+  <% if @freight.description.blank? %>
+    <p>Description unavailable</p>
+  <% end %>
+</div>
+<div id="questions" class="container">
+	<legend>Questions</legend>
+	<p>Questions unavailable</p>
+</div>

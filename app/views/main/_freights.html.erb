@@ -12,12 +12,12 @@
           <td>
             <h5><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></h5>
             <h6>US$ <%= freight.price.reais %></h6>
+            <p><%= link_to "Bid", bid_path(freight), class: 'btn' %></p>            
           </td>
           
           <td>
             <p class="text-right"><i class= <%= freight.is_high? ? "icon-fire" : ""%> ></i> <strong> <%= freight.urgency.camelize %></strong></p>
             <p class="text-right">Expires in <%= freight.expiration %> <strong>(<%= freight.days_left %> days left)</strong></p>
-            <!-- <p class="text-right"><small><%= freight.situation.camelize %></small></p> -->
             <p class="text-right"> 3 bids</p>
           </td>
         </tr>

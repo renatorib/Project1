@@ -1,24 +1,36 @@
-<table class="table table-bordered table-striped">
-  <tr>
-    <th>Freight</th>
-    <th>Price</th>
-    <th>Urgency</th>    
-    <th>Expiration</th>
-    <th>Situation</th>    
-    <th></th>
-    <th></th>
-  </tr>
+<div class="container">
+  <h3>Freights situation</h3>
+  <div class="row">
+    <%= render partial: "list_buttons" %> 
 
- <% @freights.each do |freight| %>
-  <tr >
-    <td><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></td>
-    <td><%= freight.price %></td>
-    <td><%= freight.urgency.camelize %></td>    
-    <td><%= freight.expiration %></td>        
-    <td><%= freight.situation %></td>            
-    <td><%= link_to "Edit", edit_freight_path(freight), class: 'btn' %></td>
-    <td><%= link_to "Cancel", freight, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %></td>
-  </tr>
-<% end %>
-</table>
-<br />
+    <table class="table table-striped table-bordered table-center table-hover">
+      <tr>
+        <th>Freight</th>
+        <th>Price</th>
+        <th>Urgency</th>    
+        <th>Expiration</th>
+        <th>Situation</th>    
+        <th style="width: 23%"></th>
+      </tr>
+
+     <% @freights.each do |freight| %>
+      <tr class=<%= freight.situation == Freight::CANCELLED ? "error" : 
+                    freight.situation == Freight::DELIVERED ? "success" :
+                    "" %>>
+        <td><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></td>
+        <td><%= freight.price %></td>
+        <td><%= freight.urgency.camelize %></td>    
+        <td><%= freight.expiration %></td>        
+        <td><%= freight.situation.camelize %></td>            
+        <td>
+          <% if [Freight::WAITING, Freight::BID].include?(freight.situation) %>
+            <%= link_to "Change freight options", edit_freight_path(freight), class: "btn btn-small" %>
+            <%= link_to "Cancel freight", freight, method: :delete, data: { confirm: "Are you sure you want to cancel the freight?" }, class: "btn btn-danger btn-small" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+    <%= render partial: "list_buttons" %> 
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container">
+	<h4>Thank you for accepting this shipping!</h4>
+	<p>You should now contact the shipper of the cargo via email or telephone to combine the best way to collect this charge.</p>
+
+	<div id="shipper_contacts" class="container">
+		<legend>Contacts</legend>
+		<p>Contacts unavailable</p>
+	</div>
+
+	<legend>Abstract</legend>
+	<div class="row">
+		<div class="span1 text-right">
+			<p>Path:</p>
+			<p>Price:</p>
+			<p>Advertiser:</p>
+			<p>Urgency:</p>
+			<p>Tracked:</p>
+			<p>Insured:</p>
+			<p>Measures:</p><br>
+			<p>Description:</p>
+		</div>
+		<div class="span7">
+			<p><strong><%= @freight.origin.name_with_state %> to <%= @freight.destination.name_with_state %></strong></p>
+			<p><strong>US$ <%= @freight.price.reais %></strong></p>			
+			<p><%= @freight.shipper.name %></p>
+			<p><small><i class= <%= @freight.is_high? ? "icon-fire" : ""%> ></i><%= @freight.urgency.camelize %></small></p>
+			<p><%= @freight.is_tracked? %></p>
+			<p><%= @freight.is_insured? %></p>
+
+			<div class="row">
+        <div class="span2">
+          <small>Heigth: <%= @freight.heigth %></small>
+        </div>
+        <div class="span2">          
+          <small>Width: <%= @freight.width %></small>
+        </div>
+        <div class="span2">          
+          <small>Length: <%= @freight.length %></small>
+        </div>
+        <div class="span2">
+          <small>Weigth: <%= @freight.weigth %></small>
+        </div>
+        <div class="span2">        
+          <small>Amount: <%= @freight.amount %></small>
+        </div>
+      </div>
+
+      <p><%= @freight.description %></p>
+		  <% if @freight.description.blank? %>
+		    <p>Description unavailable</p>
+		  <% end %>
+		</div>
+	</div>
+	<legend></legend>
+
+	<p><%= link_to "Back", "/", class: 'btn' %></p>
+
+</div>	

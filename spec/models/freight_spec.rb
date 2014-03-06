@@ -68,6 +68,22 @@ describe Freight do
 			freight = Freight.new(urgency: Freight::NORMAL)
 			expect(freight).to_not be_is_high
 		end
+
+		it "should display phrase informing that freight is tracked or not" do
+			freight = Freight.new(tracked: true)			
+			expect(freight.is_tracked?).to eql("is tracked")
+
+			freight = Freight.new(tracked: false)			
+			expect(freight.is_tracked?).to eql("isn't tracked")
+		end
+
+		it "should display phrase informing that freight is insured or not" do
+			freight = Freight.new(insured: true)			
+			expect(freight.is_insured?).to eql("is insured")
+
+			freight = Freight.new(insured: false)			
+			expect(freight.is_insured?).to eql("isn't insured")
+		end
 	end
 
 	describe "on return freights" do

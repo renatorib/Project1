@@ -1,6 +1,6 @@
 class FreightsController < ApplicationController
- 	respond_to :html, :xml 
  	before_filter :authenticate_user!
+ 	respond_to :html, :xml 
 
 	def index
 		@freights = Freight.from_shipper(current_user.shipper)
@@ -38,7 +38,7 @@ class FreightsController < ApplicationController
   def destroy  
     freight = Freight.find(params[:id])  
     freight.situation = Freight::CANCELLED
-    flash[:notice] = "Successfully cancelled freight." if freight.save
+    flash[:notice] = "Successfully cancelled freight." if freight.save(validate: false)
     redirect_to freights_path
   end
 

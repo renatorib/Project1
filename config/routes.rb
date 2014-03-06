@@ -6,9 +6,8 @@ FreightTms::Application.routes.draw do
   get '/index', to: redirect('/')
   root :to => 'main#index'
 
-
-
-
+  get 'main/bid/:freight' => "main#bid", :as => :bid
+  get 'main/accept/:freight' => "main#accept", :as => :accept
 
 
 

@@ -1,14 +1,3 @@
-<%= nav_bar :static => :top, :brand => "Freight - TMS", :responsive => true do %>
-	<%= menu_group do %>
-		<%= menu_item "Home", root_path %>
-		<%= menu_divider %>
-		<%= menu_item "You are a Shipper? Manage your freights!", freights_path %>
-		<%= menu_item "You are a Carrier? See your bids!", freights_path %>		
-	<% end %>
-<% end %>
-<br>
-
-
 <!-- http://www.onextrapixel.com/2012/11/12/how-to-use-twitter-bootstrap-to-create-a-responsive-website-design/ -->
 <div class="container">        
   <div class="hero-unit">
@@ -34,21 +23,10 @@
     <div class="span4">
       <h2>For You</h2>
       <p>Freight - TMS approaching those in need who carries freight, creating a vast network of shippers and carriers, allowing reduction of waiting time and cost! </p>
-      <!-- <p><a class="btn" href="#">Click meeee &raquo;</a></p> -->
-    </div><!-- .span4 -->  
-  </div><!-- .row -->
-</div><!-- .container -->
+    </div>
+  </div>
+</div>
 
 <body-bg>
   <%= render partial: "freights" %>   
 </body> 
-
-<%= nav_bar :fixed => :bottom do %>
-    <% menu_group :pull => :left do %>
-        <%= menu_item "Home", root_path %>
-        <%= menu_text "We make shiny things" %>
-    <% end %>
-    <% menu_group :pull => :right do %>
-    	
-    <% end %>
-<% end %>
