@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140207130140) do
+ActiveRecord::Schema.define(version: 20140311093354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20140207130140) do
     t.float    "weigth"
     t.float    "amount"
     t.float    "heigth"
+    t.datetime "shipment"
   end
 
   add_index "freights", ["destination_id"], name: "index_freights_on_destination_id", using: :btree

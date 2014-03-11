@@ -25,6 +25,7 @@ class Freight < ActiveRecord::Base
   validates_inclusion_of :urgency, in: URGENCIES
   validates_inclusion_of :situation, in: SITUATIONS
   validates :expiration, presence: true, expiration: true
+  validates :shipment, shipment: true  
   validates_numericality_of :price, greater_than_or_equal_to: 0
   validates_numericality_of :heigth, greater_than_or_equal_to: 0  
   validates_numericality_of :weigth, greater_than_or_equal_to: 0  

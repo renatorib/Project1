@@ -13,6 +13,7 @@ class FreightsController < ApplicationController
 	end
 
 	def create		
+		p freight_params
 		@freight = Freight.new(freight_params)
 		@freight.shipper = current_user.shipper
 		@freight.situation = Freight::WAITING
@@ -26,6 +27,7 @@ class FreightsController < ApplicationController
 	end
 
 	def update
+				p freight_params
 		@freight = Freight.find(params[:id])		  
 	  flash[:notice] = "Successfully updated freight." if @freight.save
 	  respond_with(@freight)
@@ -46,6 +48,7 @@ class FreightsController < ApplicationController
 
   def freight_params    
 		params.require(:freight).permit("expiration(3i)", "expiration(2i)", "expiration(1i)", 
+																		"shipment(3i)"	, "shipment(2i)"	, "shipment(1i)"	, 
 																		:origin_id			, :destination_id	, :weigth					, 
 																		:urgency				, :price					, :description		, 
 																		:tracked				, :insured				, :heigth					, 

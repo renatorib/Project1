@@ -33,12 +33,27 @@
 			</div>			
 			<div class="span10">
 				<p><%= date_select(:freight, 
-												:expiration, 
-												{default: Date.today, 
-												 start_year: Date.today.year, 
-												 order: [:day, :month, :year], 
-												 disabled: !@freight.new_record?}) %></p>
+													 :expiration, 
+													 {default: Date.today, 
+													  start_year: Date.today.year, 
+													  order: [:day, :month, :year], 
+													  disabled: !@freight.new_record?}, 
+													 {:class => 'date-select'}) %></p>
 			</div>
+			
+			<div class="span2 text-right">
+				<p><%= f.label(:shipment, 'Shipment until:') %></p>
+			</div>
+			<div class="span10">
+				<p><%= date_select(:freight, 
+													 :shipment, 
+													 {default: Date.today, 
+													  start_year: Date.today.year, 
+													  order: [:day, :month, :year], 
+													  disabled: !@freight.is_waiting?}, 
+													 {:class => 'date-select'}) %></p>
+			</div>
+
 
 			<div class="span2 text-right">
 				<p><%= f.label(:price, 'Price:') %></p>

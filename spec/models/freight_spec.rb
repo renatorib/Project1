@@ -13,12 +13,25 @@ describe Freight do
   it { should allow_value(10.days.from_now).for(:expiration)}
   it { should_not allow_value(1.days.ago).for(:expiration)}
 
+	it { should allow_value(Date.today).for(:shipment) }
+	it { should allow_value(10.days.from_now).for(:shipment)}
+	it { should_not allow_value(1.days.ago).for(:shipment)}
+
   it { should validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
   it { should validate_numericality_of(:heigth).is_greater_than_or_equal_to(0) }  
 	it { should validate_numericality_of(:weigth).is_greater_than_or_equal_to(0) }    
 	it { should validate_numericality_of(:width).is_greater_than_or_equal_to(0) }    	
 	it { should validate_numericality_of(:length).is_greater_than_or_equal_to(0) } 
 	it { should validate_numericality_of(:amount).is_greater_than_or_equal_to(0) } 	
+
+	describe "enhanced validator" do
+
+		it "should validate when shipment is soon than expiration date" do
+			freight = Freight.new(expiration: Date.today + 30.days, shipment: Date.today + 4.days)			
+			expect(freight.valid?).to eql(false)
+			expect(freight.errors.messages[:shipment]).to eql(["cannot be soon than expiration"])
+		end		
+	end
 
 	describe "on look the freight" do
 

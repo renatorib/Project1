@@ -9,10 +9,11 @@
 
 	<legend>Abstract</legend>
 	<div class="row">
-		<div class="span1 text-right">
+		<div class="span2 text-right">
 			<p>Path:</p>
 			<p>Price:</p>
 			<p>Advertiser:</p>
+			<p>Shipment until:</p>
 			<p>Urgency:</p>
 			<p>Tracked:</p>
 			<p>Insured:</p>
@@ -23,6 +24,7 @@
 			<p><strong><%= @freight.origin.name_with_state %> to <%= @freight.destination.name_with_state %></strong></p>
 			<p><strong>US$ <%= @freight.price.reais %></strong></p>			
 			<p><%= @freight.shipper.name %></p>
+			<p><%= @freight.shipment %></p>
 			<p><small><i class= <%= @freight.is_high? ? "icon-fire" : ""%> ></i><%= @freight.urgency.camelize %></small></p>
 			<p><%= @freight.is_tracked? %></p>
 			<p><%= @freight.is_insured? %></p>

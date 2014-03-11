@@ -1,7 +1,7 @@
 <div class="container">
-  <h3>Freights situation</h3>
   <div class="row">
     <%= render partial: "list_buttons" %> 
+    <legend>Box Freight</legend>
 
     <table class="table table-striped table-bordered table-center table-hover">
       <tr>
@@ -18,7 +18,7 @@
                     freight.situation == Freight::DELIVERED ? "success" :
                     "" %>>
         <td><%= freight.origin.name_with_state %> to <%= freight.destination.name_with_state %></td>
-        <td><%= freight.price %></td>
+        <td><label class="text-right"><%= freight.price %></label></td>
         <td><%= freight.urgency.camelize %></td>    
         <td><%= freight.expiration %></td>        
         <td><%= freight.situation.camelize %></td>            
@@ -31,6 +31,7 @@
       </tr>
     <% end %>
     </table>
-    <%= render partial: "list_buttons" %> 
+    <%= render partial: "list_buttons" %>     
   </div>
 </div>
+
