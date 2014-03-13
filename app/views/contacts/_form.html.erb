@@ -1,0 +1,39 @@
+<%= form_for(contact, as: :contact) do |f| %>
+	<div class="container">
+		<div class="row">
+			<%= render "layouts/error_messages", :target => @contact %>	<br>
+	
+			<legend>Contact</legend>
+
+			<div class="span2 text-right">
+				<p><%= f.label(:name, 'Name:') %></p>
+			</div>
+			<div class="span10">
+				<p><%= f.text_field(:name, class: "span5") %></p>
+			</div>
+
+			<div class="span2 text-right">
+				<p><%= f.label(:celphone, 'Celphone:') %></p>
+			</div>			
+			<div class="span10">
+				<p><%= f.text_field(:celphone, class: "span2") %></p>
+			</div>
+			
+			<div class="span2 text-right">
+				<p><%= f.label(:email, 'Email:') %></p>
+			</div>
+			<div class="span10">
+				<p><%= f.text_field(:email, class: "span5") %></p>
+			</div>
+
+			<div class="span2 text-right">
+				<p><%= f.label(:active, 'Active:') %></p>
+			</div>
+			<div class="span10">
+				<p><%= f.check_box(:active) %></p>
+			</div>
+
+			<%= render partial: "form_buttons" %>
+		</div>
+	</div>	
+<% end %>

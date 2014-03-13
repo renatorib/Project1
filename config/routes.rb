@@ -2,7 +2,7 @@ FreightTms::Application.routes.draw do
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'  
 
-  resources :freights
+  resources :freights, :contacts
   get '/index', to: redirect('/')
   root :to => 'main#index'
 

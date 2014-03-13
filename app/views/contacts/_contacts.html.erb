@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <%= render partial: "list_buttons" %> 
+    <legend>Box Contact</legend>
+
+    <table class="table table-striped table-bordered table-center table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Celphone</th>
+        <th>Email</th>    
+        <th>User</th>
+        <th style="width: 17%"></th>
+      </tr>
+
+     <% @contacts.each do |contact| %>
+      <tr class=<%= contact.active != true ? "error" : "" %>>
+        <td><%= contact.name %></td>
+        <td><%= contact.celphone %></td>
+        <td><%= contact.email %></td>    
+        <td><%= nil %></td>        
+        <td>
+          <% if contact.active %>
+            <%= link_to "Change contact", edit_contact_path(contact), class: "btn btn-small" %>
+            <%= link_to "Inativate", contact, method: :delete, data: { confirm: "Are you sure you want to inativate the contact?" }, class: "btn btn-danger btn-small" %>
+          <% else %>
+            <%= link_to "Reactivate", nil, class: "btn btn-small" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+    <%= render partial: "list_buttons" %>     
+  </div>
+</div>
+

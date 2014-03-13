@@ -8,15 +8,13 @@ class FreightsController < ApplicationController
 	end
 
 	def new
-		@freight = Freight.new(shipper: Shipper.first, situation: Freight::WAITING, urgency: Freight::NORMAL)
+		@freight = Freight.new(shipper: current_user.shipper, situation: Freight::WAITING, urgency: Freight::NORMAL)
 	  respond_with(@freight)
 	end
 
 	def create		
-		p freight_params
-		@freight = Freight.new(freight_params)
-		@freight.shipper = current_user.shipper
-		@freight.situation = Freight::WAITING
+		@freight = Freight.new(shipper: current_user.shipper, situation: Freight::WAITING)
+		@freight.update_attributes!(freight_params)
 	  flash[:notice] = "Successfully created freight." if @freight.save
 		respond_with(@freight)	  
 	end
@@ -27,8 +25,8 @@ class FreightsController < ApplicationController
 	end
 
 	def update
-				p freight_params
 		@freight = Freight.find(params[:id])		  
+		@freight.update_attributes!(freight_params)
 	  flash[:notice] = "Successfully updated freight." if @freight.save
 	  respond_with(@freight)
 	end
