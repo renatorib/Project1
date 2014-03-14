@@ -16,13 +16,6 @@ FactoryGirl.define do
     association :state    
   end
 
-  factory :user do
-    email "test@test.com"    
-    password "12345678"
-    password_confirmation "12345678"
-    association :contact    
-  end
-
   factory :shipper do
     name "Shipper 1"
     address "Addres 1"
@@ -31,6 +24,21 @@ FactoryGirl.define do
     cep "85602210"
 
     association :city
+  end
+
+  factory :contact do
+    email "test@testunit.com"    
+    name "Barnabe Chinchesky"
+    celphone "12345678"
+    active true
+    association :shipper
+  end
+
+  factory :user do
+    email "test@testunit.com"    
+    password "12345678"
+    password_confirmation "12345678"
+    association :contact    
   end
 
   factory :freight do

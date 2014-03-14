@@ -25,21 +25,31 @@ class ContactsController < ApplicationController
 	end
 
 	def update
-		@contact = Contact.find(params[:id])		  
-		@contact.update_attributes!(contact_params)
+		@contact = Contact.find(params[:id])		
+		@contact.name = contact_params[:name]
+		@contact.celphone = contact_params[:celphone]		
+		@contact.email = contact_params[:email]
+		@contact.active = contact_params[:active]		
 	  flash[:notice] = "Successfully updated contact." if @contact.save
 	  respond_with(@contact)
 	end
 
   def destroy  
     contact = Contact.find(params[:id])      
-    contact.active = :false
-    flash[:notice] = "Successfully inativate contact." if contact.save
+    contact.active = false
+    flash[:notice] = "Successfully inativate contact." if contact.save(validate: false)
     redirect_to contacts_path
   end
 
 	def show
 		redirect_to contacts_path		
+	end
+
+	def reactivate
+		contact = Contact.find(params[:id])
+    contact.active = true
+    flash[:notice] = "Successfully reactivate contact." if contact.save(validate: false)
+		redirect_to contacts_path
 	end
 
 private

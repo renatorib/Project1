@@ -23,7 +23,7 @@
             <%= link_to "Change contact", edit_contact_path(contact), class: "btn btn-small" %>
             <%= link_to "Inativate", contact, method: :delete, data: { confirm: "Are you sure you want to inativate the contact?" }, class: "btn btn-danger btn-small" %>
           <% else %>
-            <%= link_to "Reactivate", nil, class: "btn btn-small" %>
+            <%= link_to "Reactivate", reactivate_path(contact), class: "btn btn-small" %>
           <% end %>
         </td>
       </tr>
