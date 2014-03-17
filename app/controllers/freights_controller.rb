@@ -25,6 +25,7 @@ class FreightsController < ApplicationController
 	end
 
 	def update
+		binding.pry
 		@freight = Freight.find(params[:id])		  
 		@freight.update_attributes!(freight_params)
 	  flash[:notice] = "Successfully updated freight." if @freight.save

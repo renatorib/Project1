@@ -23,4 +23,20 @@ describe Contact do
 	it { should_not allow_value("contact@").for(:email)}
 	it { should_not allow_value("contact@contact").for(:email)}
 	it { should_not allow_value("contact@contact.").for(:email)}	
+
+	describe "on return contacts" do
+
+		before :each do
+			@shipper = FactoryGirl.create(:shipper)
+
+			contact1 = FactoryGirl.create(:contact, shipper: @shipper, active: true)
+			contact2 = FactoryGirl.create(:contact, shipper: @shipper, active: true)
+			contact3 = FactoryGirl.create(:contact, shipper: @shipper, active: false)
+		end
+
+		it "should return only available contacts" do
+			expect(Contact.available.count).to eql(2)
+			expect(@shipper.contacts.available.count).to eql(2)
+		end
+	end
 end
