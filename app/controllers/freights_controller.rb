@@ -15,6 +15,14 @@ class FreightsController < ApplicationController
 	def create		
 		@freight = Freight.new(shipper: current_user.shipper, situation: Freight::WAITING)
 		@freight.update_attributes!(freight_params)
+
+		params["contacts"].keys.each do |contact_id|			
+			contact = FreightContact.new(contact_id: contact_id, freight_id: @freight.id)
+			contact.freight = @freight
+			contact.contact = Contact.find(contact_id)
+			@freight.freight_contacts << contact
+		end
+
 	  flash[:notice] = "Successfully created freight." if @freight.save
 		respond_with(@freight)	  
 	end
@@ -25,9 +33,17 @@ class FreightsController < ApplicationController
 	end
 
 	def update
-		binding.pry
 		@freight = Freight.find(params[:id])		  
 		@freight.update_attributes!(freight_params)
+
+		params["contacts"].keys.each do |contact_id|			
+			contact = FreightContact.find_or_initialize_by(contact_id: contact_id, freight_id: @freight.id)
+			contact.freight = @freight
+			contact.contact = Contact.find(contact_id)
+
+			@freight.freight_contacts << contact
+		end
+
 	  flash[:notice] = "Successfully updated freight." if @freight.save
 	  respond_with(@freight)
 	end

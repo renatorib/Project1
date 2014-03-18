@@ -130,7 +130,11 @@
 			<% current_user.shipper.contacts.available.each do |contact| %>
 				<div class="span3">
 					<label class="checkbox">
-						<input type="checkbox" name=<%= "contacts[#{contact.id.to_s}]" %> >
+						<% if FreightContact.find_by(contact_id: contact.id, freight_id: @freight.id) %>
+							<input type="checkbox" name=<%= "contacts[#{contact.id.to_s}]" %> checked >
+						<% else %>
+							<input type="checkbox" name=<%= "contacts[#{contact.id.to_s}]" %> >
+						<% end %>
 						<%= contact.name %>
 					</label>
 				</div>
