@@ -12,7 +12,8 @@ class FreightsController < ApplicationController
 	  respond_with(@freight)
 	end
 
-	def create		
+	def create	
+	binding.pry	
 		@freight = Freight.new(shipper: current_user.shipper, situation: Freight::WAITING)
 		@freight.update_attributes!(freight_params)
 
@@ -33,6 +34,7 @@ class FreightsController < ApplicationController
 	end
 
 	def update
+		binding.pry
 		@freight = Freight.find(params[:id])		  
 		@freight.update_attributes!(freight_params)
 
