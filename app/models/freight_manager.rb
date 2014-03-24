@@ -5,13 +5,14 @@ class FreightManager
 	end
 
 	def self.save(shipper, params)
-		@freight             = Freight.find_or_initialize_by(params[:id])
+		binding.pry
+		@freight             = Freight.find_or_initialize_by_id(params[:id])
 		# @freight           = Freight.new(shipper: shipper, situation: Freight::WAITING)
 		@freight.shipper     = shipper
 		@freight.origin      = City.find(params["freight"]["origin_id"]) if @freight.new_record?
 		@freight.destination = City.find(params["freight"]["destination_id"]) if @freight.new_record?
 		@freight.situation   = Freight::WAITING if @freight.new_record?
-		@freight.price       = params["freight"]["price"].to_f
+		@freight.price       = params["freight"]["price"].to_f if params["freight"]["price"]
 		@freight.description = params["freight"]["description"]
 		@freight.heigth      = params["freight"]["heigth"].to_f
 		@freight.width       = params["freight"]["width"].to_f
@@ -19,7 +20,7 @@ class FreightManager
 		@freight.length      = params["freight"]["length"].to_f
 		@freight.amount      = params["freight"]["amount"].to_f
 		@freight.urgency     = params["freight"]["urgency"]
-		@freight.expiration  = "#{params['freight']['expiration(3i)']}/#{params['freight']['expiration(2i)']}/#{params['freight']['expiration(1i)']}".to_date
+		@freight.expiration  = "#{params['freight']['expiration(3i)']}/#{params['freight']['expiration(2i)']}/#{params['freight']['expiration(1i)']}".to_date if params['freight']['expiration(3i)']
 		@freight.shipment    = "#{params['freight']['shipment(3i)']}/#{params['freight']['shipment(2i)']}/#{params['freight']['shipment(1i)']}".to_date
 		@freight.tracked     = params["freight"]["tracked"].to_i
 		@freight.insured     = params["freight"]["insured"].to_i
@@ -35,8 +36,16 @@ class FreightManager
 		@freight
 	end
 
+	def self.cancel(id)
+    freight = Freight.find(id)  
+    freight.situation = Freight::CANCELLED
+    freight.save(validate: false)
+	end
+
 	def self.collect(shipper)
 		Freight.from_shipper(shipper)
 	end
+
+
 
 end

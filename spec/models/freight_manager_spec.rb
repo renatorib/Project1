@@ -92,5 +92,12 @@ describe FreightManager do
 			expect(freight.amount).to eql(30.0)
 			expect(freight.valid?).to eql(true)
 		end
+
+		it "when canceling freight" do
+			@params["id"] = "18"
+			FreightManager.cancel(@params["id"])
+			expect(Freight.find(@params["id"]).situation).to eql(Freight::CANCELLED)
+		end
+
 	end
 end
