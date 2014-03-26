@@ -5,14 +5,12 @@ class FreightManager
 	end
 
 	def self.save(shipper, params)
-		binding.pry
-		@freight             = Freight.find_or_initialize_by_id(params[:id])
-		# @freight           = Freight.new(shipper: shipper, situation: Freight::WAITING)
+		@freight             = Freight.find_or_initialize_by(id: params["id"])				
 		@freight.shipper     = shipper
-		@freight.origin      = City.find(params["freight"]["origin_id"]) if @freight.new_record?
+		@freight.origin      = City.find(params["freight"]["origin_id"]) if @freight.new_record? 
 		@freight.destination = City.find(params["freight"]["destination_id"]) if @freight.new_record?
 		@freight.situation   = Freight::WAITING if @freight.new_record?
-		@freight.price       = params["freight"]["price"].to_f if params["freight"]["price"]
+		@freight.price       = params["freight"]["price"].to_f if params["freight"]["price"]	
 		@freight.description = params["freight"]["description"]
 		@freight.heigth      = params["freight"]["heigth"].to_f
 		@freight.width       = params["freight"]["width"].to_f
@@ -24,7 +22,7 @@ class FreightManager
 		@freight.shipment    = "#{params['freight']['shipment(3i)']}/#{params['freight']['shipment(2i)']}/#{params['freight']['shipment(1i)']}".to_date
 		@freight.tracked     = params["freight"]["tracked"].to_i
 		@freight.insured     = params["freight"]["insured"].to_i
-
+		
 		params["contacts"].keys.each do |contact_id|			
 			contact = FreightContact.find_or_initialize_by(contact_id: contact_id, freight_id: @freight.id)
 			contact.freight = @freight
@@ -32,6 +30,11 @@ class FreightManager
 
 			@freight.freight_contacts << contact
 		end
+
+		FreightContact.where(freight_id: @freight.id).each do |contact|
+			contact.delete unless params["contacts"].keys.include?(contact.contact_id.to_s)
+		end
+
 		@freight.save
 		@freight
 	end

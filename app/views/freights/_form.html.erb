@@ -127,7 +127,7 @@
 
 			<legend>Contacts</legend>
 			<div class="row">
-			<% current_user.shipper.contacts.available.each do |contact| %>
+			<% current_user.shipper.contacts.of_freight_or_available(@freight).each do |contact| %>
 				<div class="span3">
 					<label class="checkbox">
 						<% if FreightContact.find_by(contact_id: contact.id, freight_id: @freight.id) %>

@@ -61,7 +61,19 @@
 
 <div id="shipper_contacts" class="container">
 	<legend>Shipper contacts</legend>
-	<p>Contacts unavailable</p>
+  <% @freight.freight_contacts.each do |contact| %>
+
+    <div class="span2 text-right">
+      <label class="checkbox">
+        <%= contact.contact.name %>
+      </label>
+    </div>
+    <div class="span8">
+      <label class="span1"><%= contact.contact.phone %></label>
+      <label class="span1"><%= contact.contact.email %></label>
+    </div>
+
+  <% end %>
 </div>
 <div id="detailed_description" class="container">
 	<legend>Load description</legend>
