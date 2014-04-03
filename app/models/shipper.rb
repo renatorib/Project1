@@ -4,7 +4,8 @@ class Shipper < ActiveRecord::Base
   has_many :contacts
 
   validates_uniqueness_of :name, :cnpj
-  validates_presence_of :name, :cnpj, :address, :phone
+  validates_presence_of :name, :cnpj, :address, :address_number, :phone, :alternative_phone
   validates :cnpj, :cnpj => true
   validates_format_of :cep, with: /^[0-9]{5}-?[0-9]{3}$/, multiline: true
+  validates :alternative_phone, alternative_phone: true  
 end

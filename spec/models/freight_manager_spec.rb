@@ -19,8 +19,12 @@ describe FreightManager do
 			@shipper = FactoryGirl.create(:shipper, id: 2, name: "contact 123", cnpj: "33640887000131")
 			FactoryGirl.create(:contact, id: 2, shipper: @shipper)
 			FactoryGirl.create(:contact, id: 3, shipper: @shipper)
+			FactoryGirl.create(:city, id: 1)
+			FactoryGirl.create(:freight, id: 18)
 
-			@params = {"freight" => {"expiration(3i)" => "17",
+			@params = {"freight" => {"origin_id" 			=> "1",
+													     "destination_id" => "1",
+															 "expiration(3i)" => "17",
 														   "expiration(2i)" => "8",
 														   "expiration(1i)" => "2016",
 															 "shipment(3i)"   => "18",
@@ -43,35 +47,55 @@ describe FreightManager do
 		end
 
 		it "when new freight" do
-			pending
 			freight = FreightManager.save(@shipper, @params)
-				
-			freight.valid?			
-			p freight
-			p freight.errors
-			
+
+			expect(freight.shipper.name).to eql(Shipper.find(2).name)			
 			expect(freight.expiration.to_date).to eql("17/08/2016".to_date)
 			expect(freight.shipment.to_date).to eql("18/08/2016".to_date)
-			expect(freight.valid?).to eql(true)
-			expect(freight.situation).to eql("high")
-			expect(freight.situation).to eql("high")
+			expect(freight.urgency).to eql("high")
+			expect(freight.situation).to eql("waiting")
 			expect(freight.tracked).to eql(true)
 			expect(freight.insured).to eql(true)
-			expect(freight.price).to eql(5000)
+			expect(freight.price).to eql(5000.0)
 			expect(freight.description).to eql("test")
-			expect(freight.heigth).to eql(70)
-			expect(freight.width).to eql(60)			
-			expect(freight.weigth).to eql(50)
-			expect(freight.length).to eql(40)
-			expect(freight.amount).to eql(30)
-
+			expect(freight.heigth).to eql(70.0)
+			expect(freight.width).to eql(60.0)			
+			expect(freight.weigth).to eql(50.0)
+			expect(freight.length).to eql(40.0)
+			expect(freight.amount).to eql(30.0)
+			expect(freight.valid?).to eql(true)
 			expect(freight.freight_contacts.count).to eql(2)
 		end
 
 		it "when an existent freight" do
-			pending
 			@params["action"] = "update"
 			@params["id"] = "18"
+			@params["freight"].delete("origin_id")
+			@params["freight"].delete("destination_id")
+
+			freight = FreightManager.save(@shipper, @params)
+
+			expect(freight.shipper.name).to eql(Shipper.find(2).name)			
+			expect(freight.expiration.to_date).to eql("17/08/2016".to_date)
+			expect(freight.shipment.to_date).to eql("18/08/2016".to_date)
+			expect(freight.urgency).to eql("high")
+			expect(freight.situation).to eql("waiting")
+			expect(freight.tracked).to eql(true)
+			expect(freight.insured).to eql(true)
+			expect(freight.price).to eql(5000.0)
+			expect(freight.description).to eql("test")
+			expect(freight.heigth).to eql(70.0)
+			expect(freight.width).to eql(60.0)			
+			expect(freight.weigth).to eql(50.0)
+			expect(freight.length).to eql(40.0)
+			expect(freight.amount).to eql(30.0)
+			expect(freight.valid?).to eql(true)
+		end
+
+		it "when canceling freight" do
+			@params["id"] = "18"
+			FreightManager.cancel(@params["id"])
+			expect(Freight.find(@params["id"]).situation).to eql(Freight::CANCELLED)
 		end
 	end
 end

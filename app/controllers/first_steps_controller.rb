@@ -16,5 +16,4 @@ class FirstStepsController < ApplicationController
 	def billing
 
 	end
-
 end

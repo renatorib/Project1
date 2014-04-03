@@ -59,12 +59,6 @@ FactoryGirl.define do
 
   factory :freight_contact do
     association :freight
-    association :contact 
+    association :contact
   end
-
-
-
-
-
-
 end

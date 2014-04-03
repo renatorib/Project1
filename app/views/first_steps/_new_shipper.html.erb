@@ -1,0 +1,40 @@
+<%= form_for(@shipper, as: :shipper) do |f| %>
+	<legend>Shipper details</legend> 
+	<div class="span6">
+		<%= f.label(:name, 'Name') %>
+		<%= f.text_field(:name, class: "span6", placeholder: "Type something…") %>
+	</div>
+
+	<div class="span6">
+		<%= f.label(:cnpj, 'CNPJ') %>
+		<%= f.text_field(:cnpj, class: "span3", placeholder: "Type something…") %>
+	</div>  
+
+	<legend>Address</legend>			
+	<div class="span12">
+		<%= f.label(:cep, 'CEP') %>
+		<%= f.text_field(:cep, class: "span2", placeholder: "Type something…") %>
+	</div>
+	<div class="span12">
+		<%= f.label(:city_id, 'City') %>
+		<%= f.collection_select(:city_id, City.all, :id, :name, {}, {class: "span5"}) %>
+	</div>
+
+	<div class="span6">
+		<%= f.label(:address, 'Address') %>
+		<%= f.text_field(:address, class: "span5", placeholder: "Type something…") %>
+	</div>
+	<div class="span6">
+		<%= f.label(:address_number, 'Number') %>
+		<%= f.text_field(:address_number, class: "span1", placeholder: "Type something…") %>
+	</div>
+
+	<div class="span6">
+		<%= f.label(:phone, 'Phone') %>
+		<%= f.text_field(:phone, class: "span2", placeholder: "Type something…") %>
+	</div>
+	<div class="span6">
+		<%= f.label(:alternative_phone, 'Alternative phone') %>
+		<%= f.text_field(:phone, class: "span2", placeholder: "Type something…") %>
+	</div>
+<% end %>
