@@ -56,4 +56,15 @@ FactoryGirl.define do
     association :origin, factory: :city
     association :destination, factory: :city
   end
+
+  factory :freight_contact do
+    association :freight
+    association :contact 
+  end
+
+
+
+
+
+
 end

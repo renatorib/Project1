@@ -4,6 +4,7 @@ describe Freight do
 	it { should belong_to(:shipper) }
 	it { should belong_to(:origin).class_name('City') }
 	it { should belong_to(:destination).class_name('City') }
+	it { should have_many(:freight_contacts) }	
 
 	it { should ensure_inclusion_of(:urgency).in_array(%w(high normal)) }
 	it { should ensure_inclusion_of(:situation).in_array(%w(waiting bid transport delivered finalized cancelled)) }

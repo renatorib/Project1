@@ -3,20 +3,19 @@ class FreightsController < ApplicationController
  	respond_to :html, :xml 
 
 	def index
-		@freights = Freight.from_shipper(current_user.shipper)
+		@freights = FreightManager.collect(current_user.shipper)
 		respond_with(@freights)
 	end
 
 	def new
-		@freight = Freight.new(shipper: current_user.shipper, situation: Freight::WAITING, urgency: Freight::NORMAL)
+		@freight = FreightManager.build(current_user.shipper)
 	  respond_with(@freight)
 	end
 
-	def create		
-		@freight = Freight.new(shipper: current_user.shipper, situation: Freight::WAITING)
-		@freight.update_attributes!(freight_params)
-	  flash[:notice] = "Successfully created freight." if @freight.save
-		respond_with(@freight)	  
+	def create
+		freight = FreightManager.save(current_user.shipper, params)
+	  flash[:notice] = "Successfully created freight." if freight.valid?
+		respond_with(freight)
 	end
 
 	def edit
@@ -25,10 +24,9 @@ class FreightsController < ApplicationController
 	end
 
 	def update
-		@freight = Freight.find(params[:id])		  
-		@freight.update_attributes!(freight_params)
-	  flash[:notice] = "Successfully updated freight." if @freight.save
-	  respond_with(@freight)
+		freight = FreightManager.save(current_user.shipper, params)
+	  flash[:notice] = "Successfully updated freight." if freight.valid?
+	  respond_with(freight)
 	end
 
 	def show
@@ -36,9 +34,7 @@ class FreightsController < ApplicationController
 	end
 
   def destroy  
-    freight = Freight.find(params[:id])  
-    freight.situation = Freight::CANCELLED
-    flash[:notice] = "Successfully cancelled freight." if freight.save(validate: false)
+  	flash[:notice] = "Successfully cancelled freight." if FreightManager.cancel(params[:id])
     redirect_to freights_path
   end
 

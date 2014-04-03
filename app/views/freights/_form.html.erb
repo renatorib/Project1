@@ -125,6 +125,26 @@
 				</div>
 			</div>
 
+			<legend>Contacts</legend>
+			<div class="row">
+			<% current_user.shipper.contacts.available.each do |contact| %>
+				<div class="span3">
+					<label class="checkbox">
+						<% if FreightContact.find_by(contact_id: contact.id, freight_id: @freight.id) %>
+							<input type="checkbox" name=<%= "contacts[#{contact.id.to_s}]" %> checked >
+						<% else %>
+							<input type="checkbox" name=<%= "contacts[#{contact.id.to_s}]" %> >
+						<% end %>
+						<%= contact.name %>
+					</label>
+				</div>
+				<div class="span8">
+					<label class="span1"><%= contact.phone %></label>
+					<label class="span1"><%= contact.email %></label>
+				</div>
+			<% end %>
+			</div>
+
 			<%= render partial: "form_buttons" %>
 		</div>
 	</div>
