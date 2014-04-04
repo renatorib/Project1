@@ -17,4 +17,24 @@ describe Shipper do
   it { should allow_value('85601-000').for(:cep) }  
   it { should_not allow_value('601000').for(:cep) }
   it { should_not allow_value('a601000').for(:cep) }
+
+  it "should validate phone same as alternative phone" do
+		shipper = Shipper.new(phone: "46 88041478", alternative_phone: "46 88041478")
+		expect(shipper.valid?).to eql(false)
+		expect(shipper.errors.messages[:alternative_phone]).to eql(["must be different from the phone."])
+
+		shipper = Shipper.new(phone: "", alternative_phone: "46 88041478")
+		expect(shipper.valid?).to eql(false)
+		expect(shipper.errors.messages[:alternative_phone]).to be_blank
+
+		shipper = Shipper.new(phone: "", alternative_phone: "")
+		expect(shipper.valid?).to eql(false)
+		expect(shipper.errors.messages[:alternative_phone]).to be_blank
+	end	
+
+
+
+
+
+
 end

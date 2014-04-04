@@ -19,7 +19,9 @@ FactoryGirl.define do
   factory :shipper do
     name "Shipper 1"
     address "Addres 1"
+    address_number "2332 A"    
     phone "123123123123"
+    alternative_phone ""
     cnpj "29692612000174"
     cep "85602210"
 
