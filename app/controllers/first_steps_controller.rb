@@ -8,8 +8,20 @@ class FirstStepsController < ApplicationController
 	end
 
 	def first_page
-		binding.pry
-# <%= collection_select(:city_id, City.all, :id, :name, {}, {class: "span5"}) %>
+		user = User.new(email: params["email"], password: params["password"])
+		user.save
+		sign_in user
+		
+		shipper = Shipper.new(name: 						 params["name"], 
+													cnpj:              params["cnpj"], 
+													cep:               params["cep"], 
+													city:              City.find(params["city"]["id"]), 
+													address:           params["address"], 
+													address_number:    params["address_number"], 
+													phone:             params["phone"], 
+													alternative_phone: params["alternative_phone"])
+		shipper.save
+
 		redirect_to :billing
 	end
 

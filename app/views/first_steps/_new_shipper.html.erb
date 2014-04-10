@@ -18,7 +18,7 @@
 	</div>
 	<div class="span12">
 		<label>City</label>
-		<%= collection_select(:city, :name, City.all, :id, :name, {}, {class: "span4"}) %>		
+		<%= collection_select(:city, :id, City.all, :id, :name, {}, {class: "span4"}) %>		
 	</div>
 
 	<div class="span6">
