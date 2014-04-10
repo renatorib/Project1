@@ -11,8 +11,9 @@ FreightTms::Application.routes.draw do
 
   get 'contacts/reactivate/:id' => "contacts#reactivate", as: :reactivate
   get 'first_steps/shipper_form' => "first_steps#shipper_form", :as => :shipper_form
-  get 'first_steps/first_page' => 'first_steps#first_page', :as => :first_page
+  post 'first_steps/first_page' => 'first_steps#first_page', :as => :first_page
   get 'first_steps/billing' => "first_steps#billing", :as => :billing
+  get 'first_steps/user_shipper' => "first_steps#user_shipper", :as => :user_shipper
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

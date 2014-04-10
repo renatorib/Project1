@@ -1,40 +1,41 @@
-<%= form_for(@shipper, as: :shipper) do |f| %>
+<div name="shipper" id="shipper">
+
 	<legend>Shipper details</legend> 
 	<div class="span6">
-		<%= f.label(:name, 'Name') %>
-		<%= f.text_field(:name, class: "span6", placeholder: "Type something…") %>
+		<label>Name</label>
+		<input id="name" name="name" type="text" class="span6" placeholder="Type something…">
 	</div>
 
 	<div class="span6">
-		<%= f.label(:cnpj, 'CNPJ') %>
-		<%= f.text_field(:cnpj, class: "span3", placeholder: "Type something…") %>
+		<label>CNPJ</label>
+		<input id="cnpj" name="cnpj" type="text" class="span3" placeholder="Type something…">
 	</div>  
 
 	<legend>Address</legend>			
 	<div class="span12">
-		<%= f.label(:cep, 'CEP') %>
-		<%= f.text_field(:cep, class: "span2", placeholder: "Type something…") %>
+		<label>CEP</label>
+		<input id="cep" name="cep" type="text" class="span2" placeholder="Type something…">
 	</div>
 	<div class="span12">
-		<%= f.label(:city_id, 'City') %>
-		<%= f.collection_select(:city_id, City.all, :id, :name, {}, {class: "span5"}) %>
+		<label>City</label>
+		<%= collection_select(:city, :name, City.all, :id, :name, {}, {class: "span4"}) %>		
 	</div>
 
 	<div class="span6">
-		<%= f.label(:address, 'Address') %>
-		<%= f.text_field(:address, class: "span5", placeholder: "Type something…") %>
+		<label>Address</label>	
+		<input id="address" name="address" type="text" class="span5" placeholder="Type something…">
 	</div>
 	<div class="span6">
-		<%= f.label(:address_number, 'Number') %>
-		<%= f.text_field(:address_number, class: "span1", placeholder: "Type something…") %>
+		<label>Address number</label>	
+		<input id="address_number" name="address_number" type="text" class="span1" placeholder="Type something…">
 	</div>
 
 	<div class="span6">
-		<%= f.label(:phone, 'Phone') %>
-		<%= f.text_field(:phone, class: "span2", placeholder: "Type something…") %>
+		<label>Phone</label>	
+		<input id="phone" name="phone" type="text" class="span2" placeholder="Type something…">
 	</div>
 	<div class="span6">
-		<%= f.label(:alternative_phone, 'Alternative phone') %>
-		<%= f.text_field(:phone, class: "span2", placeholder: "Type something…") %>
+		<label>Alternative phone</label>	
+		<input id="alternative_phone" name="alternative_phone" type="text" class="span2" placeholder="Type something…">	
 	</div>
-<% end %>
+</div>

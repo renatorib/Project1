@@ -9,7 +9,7 @@ class FirstStepsController < ApplicationController
 
 	def first_page
 		binding.pry
-
+# <%= collection_select(:city_id, City.all, :id, :name, {}, {class: "span5"}) %>
 		redirect_to :billing
 	end
 

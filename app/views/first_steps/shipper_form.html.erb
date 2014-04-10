@@ -1,12 +1,17 @@
-<div class="container">
-	<div class="row">
-		<%= render partial: "new_administrator_user", locals: {new_user: @user} %>
-		<%= render partial: "new_shipper", locals: {shipper: @shipper} %>
-	
-		<div class="span8 text-right">
-		</div>
-		<div class="span4 text-right">
-			<%= link_to '<i class="icon-chevron-right"></i> Next Step'.html_safe, first_page_path(@user), class: 'btn btn-primary' %>
-		</div>
-  </div>
-</div>
+<%= form_tag(first_page_path, id: 'first_page', remote: true, style: 'none') do %>
+
+	<div class="container">
+		<div class="row">
+			<%= render partial: "new_administrator_user", locals: {new_user: @user} %>
+			<%= render partial: "new_shipper", locals: {shipper: @shipper} %>
+		
+			<div class="span8 text-right">
+			</div>
+			<div class="span4 text-right">
+				<section class="box-buttons">
+				  <%= submit_tag('<i class="icon-chevron-right"></i> Next Step'.html_safe, :class => 'btn btn-primary', :id => 'submit') %>
+				</section>
+			</div>
+	  </div>
+	</div>
+<% end %>

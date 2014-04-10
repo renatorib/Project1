@@ -1,13 +1,10 @@
-<legend>User details</legend> 
-<p>
-	<small>The user details is your administrator login. You can create another users in the end of subscription.</small>
-</p>
-<%= form_tag :user do |f| %>
-	<div class="span6">
-		<%= f.label(:email, 'Email') %>
-		<%= f.text_field(:email, class: "span6", placeholder: "Type something…") %>
+<div name="user" id="user">
+	<legend>User details</legend> 
+	<p>
+		<small>The user details is your administrator login. You can create another users in the end of subscription.</small>
+	</p>
 
-
+	<div class="span6" name="user" id="user">
 		<label>Email</label>
 		<input id="email" name="email" type="text" class="span4" placeholder="Email">
 	</div>
@@ -20,4 +17,4 @@
 		<label>Confirm password</label>			
 		<input id="confirmed_password" name="confirmed_password" type="password" class="span2" placeholder="Confirm password">
 	</div>	
-<% end %>
+</div>
