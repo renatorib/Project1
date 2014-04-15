@@ -22,10 +22,10 @@ class FirstStepsController < ApplicationController
 													alternative_phone: params["alternative_phone"])
 		shipper.save
 
-		redirect_to :billing
+		redirect_to :pricing
 	end
 
-	def billing
+	def pricing
 
 	end
 

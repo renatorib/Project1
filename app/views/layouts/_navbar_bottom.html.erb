@@ -1,8 +1,17 @@
-<%= nav_bar :static => :bottom, :brand => "Freight - TMS", :responsive => true do %>
-  <% menu_group :pull => :left do %>
-    <%= menu_item "Home", root_path %>
-    <%= menu_text "We make shiny things" %>
-  <% end %>
-  <% menu_group :pull => :right do %>      
-  <% end %>
-<% end %>
+<div class="bs-component">
+  <div class="navbar navbar-default">
+    <div class="navbar-bottom">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href=<%= "#{root_path}" %> >Freight - TMS</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href=<%= "#{new_user_session_path}" %> >Sign in</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

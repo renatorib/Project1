@@ -1,0 +1,135 @@
+.title {
+    font-weight: 700;
+}
+
+.pricing-stack .well .title {
+    color: #343331;
+    font-size: 16px;
+    margin: 0;
+    padding: 10px 0;
+    position: relative;
+    text-align: center;
+}
+
+.pricing-stack .well .title em {
+    font-weight: 100;
+}
+
+.pricing-stack .well .price {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #18BC9C; /*#6B7175;*/
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    color: #B5B5B5;
+    font-weight: 100;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 15px;
+    text-align: center;
+    text-shadow: none;
+    vertical-align: text-top;
+}
+
+.pricing-stack .well .price .digits {
+    color: #FFFFFF;
+    font-size: 40px;
+}
+
+.pricing-stack .well.active .price {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #2C3E50;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    padding-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 25px;
+}
+
+.pricing-stack .well ul.points li:before {
+    color: #FF5821;
+    content: "";
+    font-family: 'FontAwesome';
+    font-size: 6px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 6px;
+    margin-top: 0;
+    vertical-align: middle;
+}
+
+.pricing-stack .well ul.points {
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 0;
+}
+
+.pricing-stack .well ul.points li {
+    padding-bottom: 0.2em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    padding-top: 0.2em;
+}
+
+.pricing-stack .well .popular {
+    bottom: 5px;
+    color: #FF5821;
+    font-size: 10px;
+    left: 0;
+    line-height: 1;
+    padding: 1px 5px 1px 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.uc {
+    text-transform: uppercase;
+}
+
+p, dl, multicol {
+    display: block;
+}
+
+address, address[dir], article, article[dir], aside, aside[dir], blockquote, blockquote[dir], body, body[dir], caption, caption[dir], center, center[dir], col, col[dir], colgroup, colgroup[dir], dd, dd[dir], dir, dir[dir], div, div[dir], dl, dl[dir], dt, dt[dir], fieldset, fieldset[dir], figcaption, figcaption[dir], figure, figure[dir], footer, footer[dir], form, form[dir], h1, h1[dir], h2, h2[dir], h3, h3[dir], h4, h4[dir], h5, h5[dir], h6, h6[dir], header, header[dir], hgroup, hgroup[dir], hr, hr[dir], html, html[dir], legend, legend[dir], li, li[dir], listing, listing[dir], main, main[dir], marquee, marquee[dir], menu, menu[dir], nav, nav[dir], noframes, noframes[dir], ol, ol[dir], p, p[dir], plaintext, plaintext[dir], pre, pre[dir], section, section[dir], summary, summary[dir], table, table[dir], tbody, tbody[dir], td, td[dir], tfoot, tfoot[dir], th, th[dir], thead, thead[dir], tr, tr[dir], ul, ul[dir], xmp, xmp[dir] {
+    unicode-bidi: -moz-isolate;
+}
+
+ul.unstyled, ol.unstyled {
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+}
+
+ul, menu, dir {
+    display: block;
+    padding-left-ltr-source: logical;
+    padding-right-rtl-source: logical;
+    padding-start-value: 40px;
+}
+
+li {
+    line-height: 20px;
+}
+li {
+    display: list-item;
+}
