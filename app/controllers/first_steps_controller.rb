@@ -1,13 +1,13 @@
 class FirstStepsController < ApplicationController
  	respond_to :html, :xml 
  	
-	def shipper_form
+	def shipper_info
 		@shipper = Shipper.new
 		@new_user = User.new
 		respond_with(@shipper)		
 	end
 
-	def first_page
+	def shipper_info_filled
 		user = User.new(email: params["email"], password: params["password"])
 		user.save
 		sign_in user
@@ -26,7 +26,31 @@ class FirstStepsController < ApplicationController
 	end
 
 	def pricing
+		
+	end
 
+	def pricing_choosed
+		
+		redirect_to :contacts
+	end
+
+	def first_contacts
+
+	end
+
+	def first_contacts_selected
+		
+		redirect_to :first_freight
+	end
+
+	def first_freight
+
+
+	end
+
+	def first_freight_generated
+
+		redirect_to :admin
 	end
 
 	private

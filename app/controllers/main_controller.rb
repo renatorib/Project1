@@ -10,6 +10,11 @@ class MainController < ApplicationController
 	def login
 	end
 
+	def shipper_start_now
+		
+		redirect_to :shipper_info
+	end
+
 	def bid
 		@freight = Freight.find(params[:freight]) 
 		respond_with(@freight)
