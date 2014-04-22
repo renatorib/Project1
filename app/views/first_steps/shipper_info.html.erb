@@ -1,17 +1,34 @@
-<%= form_tag(shipper_info_filled_path, id: 'shipper_info', remote: true, style: 'none') do %>
-
-	<div class="container">
-		<div class="row">
-			<%= render partial: "new_administrator_user", locals: {new_user: @user} %>
-			<%= render partial: "new_shipper", locals: {shipper: @shipper} %>
-		
-			<div class="span8 text-right">
-			</div>
-			<div class="span4 text-right">
-				<section class="box-buttons">
-				  <%= submit_tag("Next Step", class: 'btn btn-primary', id: 'submit') %>
-				</section>
-			</div>
-	  </div>
+<div class="container">
+	<div class="bs-docs-section">
+		<div class="page-header">
+			<h1>Freight - TMS</h1>
+			<p class="lead">Thank you for your interest in Freight - TMS! Now we will drive you to the creation of its first shipping.</p>
+			<p class="lead">First, we need to setup your admin user and your shipper information.</p>		
+		</div>
 	</div>
-<% end %>
+
+	<div class="bs-docs-section clearfix">
+
+		<%= form_tag(shipper_info_filled_path, id: 'shipper_info', remote: true, style: 'none') do %>
+			<%= render partial: "new_administrator_user", locals: {new_user: @user} %>
+			<%= render partial: "new_shipper", locals: {shipper: @shipper} %>			
+
+			<div class="form-group">
+    		<div class="col-lg-12 col-lg-offset-11">
+    			<%= submit_tag("Next Step", class: 'btn btn-primary', id: 'submit') %>
+    		</div>
+    	</div>				
+
+		<% end %>
+	</div>
+
+	<footer>
+		<div class="row">
+      <div class="col-lg-12">
+        <ul class="list-unstyled">
+        </ul>
+      </div>
+    </div>
+	</footer>
+
+</div>

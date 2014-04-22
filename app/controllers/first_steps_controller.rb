@@ -9,8 +9,8 @@ class FirstStepsController < ApplicationController
 
 	def shipper_info_filled
 		user = User.new(email: params["email"], password: params["password"])
-		user.save
-		sign_in user
+		# user.save
+		# sign_in user
 		
 		shipper = Shipper.new(name: 						 params["name"], 
 													cnpj:              params["cnpj"], 
@@ -20,7 +20,7 @@ class FirstStepsController < ApplicationController
 													address_number:    params["address_number"], 
 													phone:             params["phone"], 
 													alternative_phone: params["alternative_phone"])
-		shipper.save
+		# shipper.save
 
 		redirect_to :pricing
 	end
