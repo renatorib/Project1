@@ -2,10 +2,18 @@
 
 <div class="container">
 
+  <div class="bs-docs-section">
+    <div class="page-header">
+      <h1>Freight - TMS</h1>
+      <p class="lead">Please choose the plan that best suits your needs!</p>
+    </div>
+  </div>
+
   <h1>Our plans</h1>
 
 	<div class="pricing-stack">
     <div class="row">
+
       <div class="col-lg-4">
         <div class="well pricing well-lg">
           <h3 class="title"><span class="uc">Flex</span><em>Starter</em></h3>
@@ -14,10 +22,11 @@
             <ul class="unstyled points">
               <li>3 User Accounts</li>
               <li>3 Private Projects</li>
-              <li>Umlimited Projects</li>
+              <li>Unlimited Projects</li>
               <li>5GB of space</li>
             </ul>
-            <a href="#" class="btn btn-success btn-small">Choose Plan</a> </div>
+            <%= link_to "Choose Plan", pricing_choosed_path(plan: :flex), class: "btn btn-success btn-small"%>
+          </div>
         </div>
       </div>
 
@@ -29,10 +38,11 @@
             <ul class="unstyled points">
               <li>50 User Accounts</li>
               <li>50 Private Projects</li>
-              <li>Umlimited Projects</li>
+              <li>Unlimited Projects</li>
               <li>Unlimited space</li>
             </ul>
-            <a href="#" class="btn btn-success btn-small">Choose Plan</a> </div>
+            <%= link_to "Choose Plan", pricing_choosed_path(plan: :team), class: "btn btn-success btn-small"%>
+          </div>
         </div>
       </div>
 
@@ -44,12 +54,15 @@
             <ul class="unstyled points">
               <li>100 User Accounts</li>
               <li>100 Private Projects</li>
-              <li>Umlimited Projects</li>
+              <li>Unlimited Projects</li>
               <li>Unlimited space</li>
             </ul>
-            <a href="#" class="btn btn-primary btn-small">Choose Plan</a> </div>
+            <%= link_to "Choose Plan", pricing_choosed_path(:enterprise), class: "btn btn-primary btn-small"%>
+          </div>
         </div>
-      </div>      
-    </div>
+      </div>  
+
+    </div>    
   </div>
+
 </div>

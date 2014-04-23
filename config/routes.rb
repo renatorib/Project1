@@ -12,16 +12,17 @@ FreightTms::Application.routes.draw do
   get 'main/bid/:freight'    => "main#bid"   , as: :bid
   get 'main/accept/:freight' => "main#accept", as: :accept
   
-  get 'first_steps/shipper_info'             => "first_steps#shipper_info"           , as: :shipper_info
-  post 'first_steps/shipper_info_filled'     => 'first_steps#shipper_info_filled'    , as: :shipper_info_filled
-  get 'first_steps/pricing'                  => "first_steps#pricing"                , as: :pricing
-  post 'first_steps/pricing_choosed'         => 'first_steps#pricing_choosed'        , as: :pricing_choosed
-  get 'first_steps/first_contacts'           => "first_steps#first_contacts"         , as: :first_contacts
-  post 'first_steps/first_contacts_selected' => 'first_steps#first_contacts_selected', as: :first_contacts_selected
-  get 'first_steps/first_freight'            => "first_steps#first_freight"          , as: :first_freight
-  post 'first_steps/first_freight_generated' => 'first_steps#first_freight_generated', as: :first_freight_generated
+  get 'first_steps/shipper_info'                 => "first_steps#shipper_info"           , as: :shipper_info
+  post 'first_steps/shipper_info_filled'         => 'first_steps#shipper_info_filled'    , as: :shipper_info_filled
+  get 'first_steps/pricing'                      => "first_steps#pricing"                , as: :pricing
+  get 'first_steps/pricing_choosed/:plan'        => 'first_steps#pricing_choosed'        , as: :pricing_choosed
+  get 'first_steps/first_contacts'               => "first_steps#first_contacts"         , as: :first_contacts
+  post 'first_steps/contact_added'               => 'first_steps#contact_added'          , as: :contact_added
+  get 'first_steps/contacts_confirmed/:contacts' => 'first_steps#contacts_confirmed'     , as: :contacts_confirmed
+  get 'first_steps/first_freight'                => "first_steps#first_freight"          , as: :first_freight
+  post 'first_steps/first_freight_generated'     => 'first_steps#first_freight_generated', as: :first_freight_generated
 
-  get 'first_steps/user_shipper'             => "first_steps#user_shipper"           , as: :user_shipper
+  get 'first_steps/user_shipper'                 => "first_steps#user_shipper"           , as: :user_shipper
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

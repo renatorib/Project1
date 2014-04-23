@@ -8,11 +8,11 @@ class FirstStepsController < ApplicationController
 	end
 
 	def shipper_info_filled
-		user = User.new(email: params["email"], password: params["password"])
+		@user = User.new(email: params["email"], password: params["password"])
 		# user.save
 		# sign_in user
 		
-		shipper = Shipper.new(name: 						 params["name"], 
+		@shipper = Shipper.new(name: 						 params["name"], 
 													cnpj:              params["cnpj"], 
 													cep:               params["cep"], 
 													city:              City.find(params["city"]["id"]), 
@@ -30,15 +30,21 @@ class FirstStepsController < ApplicationController
 	end
 
 	def pricing_choosed
-		
-		redirect_to :contacts
+		redirect_to :first_contacts
 	end
 
 	def first_contacts
-
+		@contacts = []
 	end
 
-	def first_contacts_selected
+	def contact_added
+		binding.pry
+
+		contact =	Contact.new(shipper: @shipper, user: @user, name: params[:name], email: params[:email], celphone: params[:celphone])
+		@contacts << contact		
+	end	
+
+	def contacts_confirmed
 		
 		redirect_to :first_freight
 	end

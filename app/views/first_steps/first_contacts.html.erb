@@ -1,0 +1,31 @@
+<div class="container">
+	<div class="bs-docs-section">
+		<div class="page-header">
+			<h1>Freight - TMS</h1>
+			<p class="lead">Now we need to configure users / contacts that will be responsible for shipping.</p>
+			<p class="lead">A confirmation request email will be sent to each configured contact.</p>			
+		</div>
+	</div>
+
+	<div class="bs-docs-section clearfix">
+
+		<%= render partial: "new_contacts", locals: {contacts: @contacts} %>
+
+		<div class="form-group">
+  		<div class="col-lg-12 col-lg-offset-11">
+        <%= link_to "To the freight creation", contacts_confirmed_path(contacts: @contacts), class: "btn btn-primary"%>  			
+  		</div>
+  	</div>				
+
+	</div>
+
+	<footer>
+		<div class="row">
+      <div class="col-lg-12">
+        <ul class="list-unstyled">
+        </ul>
+      </div>
+    </div>
+	</footer>
+
+</div>
