@@ -47,6 +47,9 @@
 
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag params[:controller] %>
+    
+    <%= yield :javascript_includes %>
+
   </head>
   <body>
     <%= render partial: "layouts/navbar_top" %>

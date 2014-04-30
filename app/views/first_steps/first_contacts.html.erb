@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "add_firsts_contact.js" %>
+<% end %>
+
 <div class="container">
 	<div class="bs-docs-section">
 		<div class="page-header">
@@ -9,11 +13,12 @@
 
 	<div class="bs-docs-section clearfix">
 
-		<%= render partial: "new_contacts", locals: {contacts: @contacts} %>
+		<%= render partial: "new_contacts" %>
+		<%= render partial: "contacts_list" %>
 
 		<div class="form-group">
   		<div class="col-lg-12 col-lg-offset-11">
-        <%= link_to "To the freight creation", contacts_confirmed_path(contacts: @contacts), class: "btn btn-primary"%>  			
+        <%= link_to "To the freight creation", contacts_confirmed_path(), class: "btn btn-primary"%>
   		</div>
   	</div>				
 
