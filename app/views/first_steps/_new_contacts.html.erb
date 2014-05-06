@@ -6,24 +6,39 @@
 
 				<h3>New contact</h3> 
 				<div class="col-lg-3">
-					<label>Name</label>
-					<input id="name" name="name" type="text" class="form-control" placeholder="Type something…">
+					<div class="form-group" id="group-for-name">
+						<label class="control-label" for="name">Name</label>
+						<input id="name" name="name" type="text" class="form-control" placeholder="Name">
+							<% if false %>
+								<ul>
+									<li><small class="control-small">Por favor, informe o nome...</small></li>
+									<li><small class="control-small">Por favor, informe o nome...</small></li>
+									<li><small class="control-small">Por favor, informe o nome...</small></li>
+									<li><small class="control-small">Por favor, informe o nome...</small></li>
+									<li><small class="control-small">Por favor, informe o nome...</small></li>
+								</ul>
+							<% end %>
+
+					</div>
 				</div>
 
 				<div class="col-lg-5">
-					<label>Email</label>
-					<input id="email" name="email" type="text" class="form-control" placeholder="Email">
+					<div class="form-group">
+						<label class="control-label" for="email">Email</label>
+						<input id="email" name="email" type="text" class="form-control" placeholder="Email">
+					</div>
 				</div>  
 
 				<div class="col-lg-2">
-					<label>Celphone</label>
-					<input id="celphone" name="celphone" type="text" class="form-control" placeholder="(00) 00000-0000">
+					<div class="form-group">
+						<label class="control-label" for="celphone">Celphone</label>
+						<input id="celphone" name="celphone" type="text" class="form-control" placeholder="(00) 00000-0000">
+					</div>
 				</div>
 
 	    	<div class="col-lg-2">
 					<div class="form-group">
 						<label>Add contact</label>
-
 
 						<button id="add_contact" name="add_contact" type="button" class="btn btn-primary">Add contact</button>
 

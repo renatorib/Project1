@@ -5893,10 +5893,16 @@ input:focus {
 .has-warning .form-control:focus {
   border: 2px solid #f39c12;
 }
+
 .has-error .help-block,
 .has-error .control-label {
   color: #e74c3c;
 }
+
+.has-error .control-small{
+   color: #e74c3c; 
+}
+
 .has-error .form-control,
 .has-error .form-control:focus {
   border: 2px solid #e74c3c;

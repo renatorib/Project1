@@ -43,35 +43,24 @@ class FirstStepsController < ApplicationController
 		@contacts = current_user.shipper.contacts
 	end
 
-	def contact_added
-		binding.pry
-
-		contact =	Contact.new(shipper: current_user.shipper, user: current_user, name: params[:name], email: params[:email], celphone: params[:celphone])
-		contact.save
-
-		@contacts = current_user.shipper.contacts		
-
-		render partial: "contacts_list"
-	end	
-
 	def add_contact
 		contact = Contact.new(shipper: current_user.shipper, name: params[:name], email: params[:email], celphone: params[:celphone])
 
 		password_length = 8
 		password        = Devise.friendly_token.first(password_length)
 		user            = User.new(email: params[:email], contact: contact, password: password, password_confirmation: password) 
-		p contact.valid?
-		p contact.errors.messages
 
-		p user.valid?
-		p user.errors.messages
-		
-		contact.save
-		user.save
+		respond_to do |format|
+	    if contact.save && user.save
+	      format.html { render partial: 'contacts_list'}
+	      # format.json { render json: @contact, status: :created, location: @contact }
+	    else
+				# @contacts = current_user.shipper.contacts	    	
+	      # format.html { render action: "first_contacts" }
+	      format.json { render json: contact.errors, status: :unprocessable_entity }
+	    end
+	  end
 
-		@contacts = current_user.shipper.contacts		
-
-		render partial: 'contacts_list'
 	end
 
 	def contacts_confirmed
