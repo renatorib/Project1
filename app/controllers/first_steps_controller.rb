@@ -1,14 +1,14 @@
 class FirstStepsController < ApplicationController
 	before_filter :authenticate_user!, :only => [:pricing, :first_contacts, :first_freight]	
- 	respond_to :html, :xml 
+ 	respond_to :html, :xml, :json
  	
-	def shipper_info
+	def shipper
 		@shipper  = Shipper.new
 		@new_user = User.new
 		respond_with(@shipper)		
 	end
 
-	def shipper_info_filled
+	def shipper_confirmed
 		shipper = Shipper.new(name: 						 params["name"], 
 													cnpj:              params["cnpj"], 
 													cep:               params["cep"], 
@@ -35,7 +35,7 @@ class FirstStepsController < ApplicationController
 		
 	end
 
-	def pricing_choosed
+	def pricing_confirmed
 		redirect_to :first_contacts
 	end
 
@@ -52,12 +52,10 @@ class FirstStepsController < ApplicationController
 
 		respond_to do |format|
 	    if contact.save && user.save
-	      format.html { render partial: 'contacts_list'}
-	      # format.json { render json: @contact, status: :created, location: @contact }
+				@contacts = current_user.shipper.contacts	    	
+				format.js
 	    else
-				# @contacts = current_user.shipper.contacts	    	
-	      # format.html { render action: "first_contacts" }
-	      format.json { render json: contact.errors, status: :unprocessable_entity }
+	      format.js { render('/error_messages', locals: {object: contact}, status: :unprocessable_entity)}
 	    end
 	  end
 
@@ -69,20 +67,33 @@ class FirstStepsController < ApplicationController
 	end
 
 	def first_freight
-
-
+		@freight = FreightManager.build(current_user.shipper)
 	end
 
-	def first_freight_generated
+	def freight_confirmed
+		binding.pry
+		freight = FreightManager.save(current_user.shipper, first_step_params)
 
-		redirect_to :admin
+		respond_to do |format|
+	    if freight.save
+				redirect_to :admin			
+	    else
+	      format.js { render('/error_messages', locals: {object: freight}, status: :unprocessable_entity)}
+	    end
+	  end
+
 	end
 
 	private
 
   def first_step_params    
-		# params.require(:user).permit(:id, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :created_at, :updated_at, :contact_id)
 		params.permit(:user).permit(:contact)
+		params.permit("expiration(3i)", "expiration(2i)", "expiration(1i)", 
+																		"shipment(3i)"	, "shipment(2i)"	, "shipment(1i)"	, 
+																		:origin_id			, :destination_id	, :weigth					, 
+																		:urgency				, :price					, :description		, 
+																		:tracked				, :insured				, :heigth					, 
+																		:width					, :length					, :amount					, 
+																		:situation			, origin: [:id, :name], destination: [:id, :name])
   end
-
 end

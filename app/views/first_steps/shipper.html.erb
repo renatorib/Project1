@@ -9,7 +9,7 @@
 
 	<div class="bs-docs-section clearfix">
 
-		<%= form_tag(shipper_info_filled_path, id: 'shipper_info', remote: true, style: 'none') do %>
+		<%= form_tag(shipper_confirmed_path, id: 'shipper_info', remote: true, style: 'none') do %>
 			<%= render partial: "new_administrator_user", locals: {new_user: @user} %>
 			<%= render partial: "new_shipper", locals: {shipper: @shipper} %>			
 

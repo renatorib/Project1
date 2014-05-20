@@ -1,0 +1,5 @@
+cleanErrors();
+<% object.errors.messages.each do |error| %>
+	$("#<%= error[0] %>").parent().addClass("has-error");
+	$("#<%= error[0] %>").parent().append('<%= escape_javascript( render partial: "layouts/error_messages", locals: {messages: error[1]}) %>');
+<% end %>
