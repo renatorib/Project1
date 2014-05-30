@@ -9,7 +9,7 @@
 					<div class="form-group">
 						<label class="control-label" for="origin">Origin City</label>
 						<!-- <input id="origin" name="origin" type="text" class="form-control" placeholder="Type the name of origin city"> -->
-						<%= collection_select(:origin_id, :id, City.all, :id, :name, {}, {class: "form-control", style:"width: 555px"}) %>
+						<%= collection_select(:origin, :id, City.all, :id, :name, {}, {class: "form-control", style:"width: 555px"}) %>
 					</div>
 				</div>
 
@@ -17,9 +17,32 @@
 					<div class="form-group">
 						<label class="control-label" for="destination">Destination City</label>
 						<!-- <input id="destination" name="destination" type="text" class="form-control" placeholder="Type the name of destination city"> -->
-						<%= collection_select(:destination_id, :id, City.all, :id, :name, {}, {class: "form-control", style:"width: 555px"}) %>
+						<%= collection_select(:destination, :id, City.all, :id, :name, {}, {class: "form-control", style:"width: 555px"}) %>
 					</div>
 				</div>  
+
+				<div class="col-lg-3">
+					<div class="form-group">
+						<label class="control-label" for="expiration">Expirates in</label>
+						<div class='input-group date' data-date-format="DD/MMM/YYYY">
+	            <input type='text' class="form-control" name='expiration' />
+	            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+	            </span>
+	          </div>
+					</div>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="form-group">
+
+						<label class="control-label" for="shipment">Shipment</label>
+						<div class='input-group date' data-date-format="DD/MMM/YYYY">
+	            <input type='text' class="form-control" name='shipment'/>
+	            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+	            </span>
+	          </div>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label class="col-lg-12 control-label" for="price">Price</label>
@@ -118,9 +141,38 @@
 						<input id="amount" name="amount" type="text" class="form-control" placeholder="">
 					</div>
 				</div>
+
 				<div class="col-lg-12">
+					<h4>Contacts</h4>
+					<small class="help-block">You should state what contacts that manage the freight. These contacts may be requested by the drivers to answer questions during the execution of freight.</small>
 				</div>
 
+
+				<div class="form-group">
+				<% current_user.shipper.contacts.each do |contact| %>
+					<div class="col-lg-12">
+						
+						<div class="col-lg-3">
+			        <div class="checkbox">
+			          <label>
+			            <input name=<%= "contacts[#{contact.id.to_s}]" %> type="checkbox" class="form-control"><%= contact.name %>
+			          </label>
+			        </div>
+		      	</div>
+
+	          <div class="col-lg-4">
+		          <p><%= contact.phone %></p>
+		        </div>
+		        <div class="col-lg-4">
+							<p><%= contact.email %></p>
+						</div>
+
+	        </div>
+				<% end %>
+				</div>			
+
+				<div class="col-lg-12">
+				</div>
 	    	<div class="col-lg-2">
 					<div class="form-group">
 						<label></label>

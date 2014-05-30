@@ -21,6 +21,11 @@ gem 'jazz_hands'
 	gem 'uglifier', '>= 1.3.0'
   gem 'twitter-bootstrap-rails'
 
+  #DateTime picker for bootstrap 3	
+	gem 'momentjs-rails', '~> 2.5.0'
+	gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0'
+	gem 'bootstrap-glyphicons'
+	
 gem 'simplecov', :require => false, :group => :test
 
 group :doc do

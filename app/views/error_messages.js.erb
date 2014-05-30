@@ -1,5 +1,10 @@
 cleanErrors();
 <% object.errors.messages.each do |error| %>
-	$("#<%= error[0] %>").parent().addClass("has-error");
-	$("#<%= error[0] %>").parent().append('<%= escape_javascript( render partial: "layouts/error_messages", locals: {messages: error[1]}) %>');
+	var parent = $("[name='<%= error[0] %>']").parent();
+	if (parent.attr("class").indexOf("date") > -1) {		
+		parent = parent.parent();
+	}
+
+	parent.addClass("has-error");
+	parent.append('<%= escape_javascript( render partial: "layouts/error_messages", locals: {messages: error[1]}) %>');
 <% end %>

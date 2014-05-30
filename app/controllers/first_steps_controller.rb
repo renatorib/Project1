@@ -1,6 +1,6 @@
 class FirstStepsController < ApplicationController
 	before_filter :authenticate_user!, :only => [:pricing, :first_contacts, :first_freight]	
- 	respond_to :html, :xml, :json
+ 	respond_to :html, :xml, :json, :js
  	
 	def shipper
 		@shipper  = Shipper.new
@@ -70,30 +70,26 @@ class FirstStepsController < ApplicationController
 		@freight = FreightManager.build(current_user.shipper)
 	end
 
-	def freight_confirmed
-		binding.pry
+	def freight_confirmed		
 		freight = FreightManager.save(current_user.shipper, first_step_params)
-
-		respond_to do |format|
-	    if freight.save
-				redirect_to :admin			
-	    else
+    if freight.valid?
+    	redirect_to freights_path
+    else
+			respond_to do |format|
 	      format.js { render('/error_messages', locals: {object: freight}, status: :unprocessable_entity)}
 	    end
 	  end
-
 	end
 
 	private
 
   def first_step_params    
 		params.permit(:user).permit(:contact)
-		params.permit("expiration(3i)", "expiration(2i)", "expiration(1i)", 
-																		"shipment(3i)"	, "shipment(2i)"	, "shipment(1i)"	, 
-																		:origin_id			, :destination_id	, :weigth					, 
-																		:urgency				, :price					, :description		, 
-																		:tracked				, :insured				, :heigth					, 
-																		:width					, :length					, :amount					, 
-																		:situation			, origin: [:id, :name], destination: [:id, :name])
+		params.permit(:expiration		 , :shipment	 , :origin_id, 
+									:destination_id, :weigth		 , :urgency	 , 
+									:price				 , :description, :tracked	 , 
+									:insured			 , :heigth		 , :width		 , 
+									:length				 , :amount		 , :situation, 
+									origin: [:id, :name], destination: [:id, :name])
   end
 end

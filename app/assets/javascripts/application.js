@@ -15,3 +15,6 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require behavior
+
+//= require moment
+//= require bootstrap-datetimepicker
