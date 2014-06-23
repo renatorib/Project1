@@ -8,7 +8,6 @@
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label class="control-label" for="origin">Origin City</label>
-						<!-- <input id="origin" name="origin" type="text" class="form-control" placeholder="Type the name of origin city"> -->
 						<%= collection_select(:origin, :id, City.all, :id, :name, {}, {class: "form-control", style:"width: 555px"}) %>
 					</div>
 				</div>
@@ -16,7 +15,6 @@
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label class="control-label" for="destination">Destination City</label>
-						<!-- <input id="destination" name="destination" type="text" class="form-control" placeholder="Type the name of destination city"> -->
 						<%= collection_select(:destination, :id, City.all, :id, :name, {}, {class: "form-control", style:"width: 555px"}) %>
 					</div>
 				</div>  

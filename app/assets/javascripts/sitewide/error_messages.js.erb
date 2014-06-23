@@ -1,5 +1,8 @@
 cleanErrors();
-<% object.errors.messages.each do |error| %>
+
+<% #TODO apresentar mensagem quando o erro for no model e não no attribute %>
+<% errors ||= [] %>
+<% errors.each do |error| %>
 	var parent = $("[name='<%= error[0] %>']").parent();
 	if (parent.attr("class").indexOf("date") > -1) {		
 		parent = parent.parent();

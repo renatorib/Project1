@@ -31,6 +31,6 @@ gem 'simplecov', :require => false, :group => :test
 group :doc do
   gem 'sdoc', require: false
 end
-
+gem "formtastic"
 
 # http://benw.me/posts/sortable-bootstrap-tables - Ordenar tables com clique de usuário

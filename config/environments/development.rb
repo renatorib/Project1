@@ -1,3 +1,5 @@
+require 'tls_smtp'
+
 FreightTms::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -13,8 +15,22 @@ FreightTms::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
+  # Don't care if the mailer can't send.                    
+
+  # TODO Estudar mandrill.com para enviar os emails
+  # TODO Não deixar configuração de senha neste arquivo. Sugestâo: usar ENV['senha']
+  config.action_mailer.default charset: "utf-8"
+  config.action_mailer.perform_deliveries    = true
   config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options   = {host: 'localhost:3000', protocol: "http"}
+  config.action_mailer.delivery_method       = :smtp
+  config.action_mailer.smtp_settings         = {enable_starttls_auto: true,  
+                                                address:        "smtp.gmail.com",
+                                                port:           587,
+                                                domain:         'localhost:3000',
+                                                authentication: :plain,
+                                                user_name:      "thiagocasao@gmail.com",
+                                                password:       "7h14g0r4f4"}
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

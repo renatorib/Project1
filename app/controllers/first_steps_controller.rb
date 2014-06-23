@@ -1,5 +1,5 @@
 class FirstStepsController < ApplicationController
-	before_filter :authenticate_user!, :only => [:pricing, :first_contacts, :first_freight]	
+	before_filter :authenticate_user!, :only => [:first_freight]
  	respond_to :html, :xml, :json, :js
  	
 	def shipper
@@ -18,17 +18,26 @@ class FirstStepsController < ApplicationController
 													phone:             params["phone"], 
 													alternative_phone: params["alternative_phone"])
 
-		name    = params["email"].split("@").first
-		contact = Contact.new(shipper: shipper, name: name, email: params["email"])
+		contact = Contact.new(shipper: shipper, name: params["email"].split("@").first.camelize, email: params["email"])
 		user    = User.new(email: params["email"], password: params["password"], contact: contact)
-		binding.pry
 
-		shipper.save
-		contact.save(validate: false)
-		user.save
-		sign_in user	
-
-		redirect_to :pricing
+		# TODO carregar lista de cidades
+		# TODO quando informar CEP, tentar carregar informações
+		# TODO demora para enviar email, fazer javascript para esperar, ou colocar envio de email em worker
+    unless shipper.valid? && user.valid?
+			respond_to do |format|
+			# TODO Com dois render, somente renderiza o último...
+	      format.js { render('app/assetes/javascripts/sitewide/error_messages', locals: {errors: shipper.errors.messages}, status: :unprocessable_entity)} unless shipper.valid?
+	      format.js { render('app/assetes/javascripts/sitewide/error_messages', locals: {errors: user.errors.messages}, status: :unprocessable_entity)} unless user.valid?	      
+	     end
+    else
+			
+			shipper.save
+			user.save
+			contact.save(validate: false)
+			#FIXME não redireciona
+			redirect_to :pricing
+	  end
 	end
 
 	def pricing
@@ -45,24 +54,23 @@ class FirstStepsController < ApplicationController
 
 	def add_contact
 		contact = Contact.new(shipper: current_user.shipper, name: params[:name], email: params[:email], celphone: params[:celphone])
-
-		password_length = 8
-		password        = Devise.friendly_token.first(password_length)
-		user            = User.new(email: params[:email], contact: contact, password: password, password_confirmation: password) 
+		user    = User.new(email: params[:email], contact: contact) 
 
 		respond_to do |format|
+			# TODO Validate uniqueness of contact.email
+			# TODO Dont save user here, so do not send confirmation
 	    if contact.save && user.save
-				@contacts = current_user.shipper.contacts	    	
+				@contacts = current_user.shipper.contacts
 				format.js
 	    else
-	      format.js { render('/error_messages', locals: {object: contact}, status: :unprocessable_entity)}
+	      format.js { render('/error_messages', locals: {errors: contact.errors.messages}, status: :unprocessable_entity)}
 	    end
 	  end
 
 	end
 
 	def contacts_confirmed
-	# devise new user (confirmation email)	
+		# TODO Send confirmation emails here, not in add_contact
 		redirect_to :first_freight
 	end
 
@@ -76,7 +84,7 @@ class FirstStepsController < ApplicationController
     	redirect_to freights_path
     else
 			respond_to do |format|
-	      format.js { render('/error_messages', locals: {object: freight}, status: :unprocessable_entity)}
+	      format.js { render('/error_messages', locals: {errors: freight.errors.messages}, status: :unprocessable_entity)}
 	    end
 	  end
 	end
